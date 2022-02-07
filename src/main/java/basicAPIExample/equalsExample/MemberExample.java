@@ -1,4 +1,4 @@
-package basicAPIExample;
+package basicAPIExample.equalsExample;
 
 public class MemberExample{
 

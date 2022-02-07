@@ -1,4 +1,4 @@
-package basicAPIExample;
+package basicAPIExample.equalsExample;
 
 public class Member{
 
@@ -18,4 +18,12 @@ public class Member{
         }
         return false;
     }
+
+
+    /** 문자열이 같으면 hashCode()는 같은 값을 리턴한다. */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
 }
