@@ -1,4 +1,4 @@
-package basicAPIExample.toStringExample;
+package basicAPIExample.Object.toStringExample;
 
 public class SmartPhoneExample {
 

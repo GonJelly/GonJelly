@@ -1,4 +1,4 @@
-package basicAPIExample.CloneExample;
+package basicAPIExample.Object.CloneExample;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package basicAPIExample.toStringExample;
+package basicAPIExample.Object.toStringExample;
 
 import java.sql.SQLOutput;
 import java.util.Date;
