@@ -1,4 +1,4 @@
-package backJunProduct.gold;
+package codingStudy.backJunProduct.gold;
 
 import java.util.Scanner;
 
