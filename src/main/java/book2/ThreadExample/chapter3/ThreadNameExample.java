@@ -1,4 +1,4 @@
-package ThreadExample.chapter3;
+package book2.ThreadExample.chapter3;
 
 public class ThreadNameExample {
 

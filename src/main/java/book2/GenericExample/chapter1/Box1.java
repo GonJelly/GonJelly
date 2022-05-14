@@ -1,4 +1,4 @@
-package GenericExample.chapter1;
+package book2.GenericExample.chapter1;
 
 public class Box1 {
 

@@ -1,4 +1,4 @@
-package GenericExample.chapter1;
+package book2.GenericExample.chapter1;
 
 /** 제네릭 기본지식
  * 제네릭은 람다식, 컬렉션의 Set, List, Map,스트림, NIO에서 많이 사용된다.

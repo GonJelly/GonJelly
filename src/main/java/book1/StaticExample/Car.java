@@ -1,4 +1,4 @@
-package StaticExample;
+package book1.StaticExample;
 
 public class Car {
     

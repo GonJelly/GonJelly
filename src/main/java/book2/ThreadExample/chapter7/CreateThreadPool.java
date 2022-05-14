@@ -1,4 +1,4 @@
-package ThreadExample.chapter7;
+package book2.ThreadExample.chapter7;
 
 import java.util.concurrent.*;
 

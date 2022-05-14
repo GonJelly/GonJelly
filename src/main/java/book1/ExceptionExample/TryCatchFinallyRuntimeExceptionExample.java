@@ -1,4 +1,4 @@
-package ExceptionExample;
+package book1.ExceptionExample;
 
 public class TryCatchFinallyRuntimeExceptionExample {
 

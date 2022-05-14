@@ -1,6 +1,5 @@
-package ThreadExample.chapter1;
+package book2.ThreadExample.chapter1;
 
-import java.awt.*;
 /** '띵' 하는 소리와 '띵'프린팅을 동시해 하도록 작업을 해보시오
  * 방법 1은 잘못된 예시에 대해서 작성한 것입니다.
  * 문제점 : '띵'소리와 '띵'프린팅하는 것이 동시에 이루어지지않고 소리 다음에 프린팅이된다.

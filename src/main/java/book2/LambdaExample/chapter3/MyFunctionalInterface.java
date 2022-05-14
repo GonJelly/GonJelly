@@ -1,4 +1,4 @@
-package LambdaExample.chapter3;
+package book2.LambdaExample.chapter3;
 
 public interface MyFunctionalInterface {
 

@@ -1,4 +1,4 @@
-package AbstructExample;
+package book1.AbstructExample;
 
 public class Audio implements RemoteController{
 

@@ -1,4 +1,4 @@
-package basicAPIExample.Object.hashcodeExample;
+package book1.BasicAPIExample.Object.hashcodeExample;
 
 import java.util.HashMap;
 

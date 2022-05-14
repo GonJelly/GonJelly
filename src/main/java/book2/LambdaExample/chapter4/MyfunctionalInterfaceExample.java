@@ -1,4 +1,4 @@
-package LambdaExample.chapter4;
+package book2.LambdaExample.chapter4;
 
 
 /** 클래스 멤버 사용하는 람다식

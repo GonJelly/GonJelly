@@ -1,4 +1,4 @@
-package LambdaExample.chapter2;
+package book2.LambdaExample.chapter2;
 
 public class MyFunctionalInterfaceExample {
     /** 매개변수가 있는 람다식

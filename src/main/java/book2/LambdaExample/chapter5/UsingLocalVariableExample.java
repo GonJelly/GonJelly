@@ -1,4 +1,4 @@
-package LambdaExample.chapter5;
+package book2.LambdaExample.chapter5;
 
 public class UsingLocalVariableExample {
     /** 람다식에서 로컬 변수 사용하기

@@ -1,4 +1,4 @@
-package ThreadExample.chapter4;
+package book2.ThreadExample.chapter4;
 
 public class PriorityThreadExample {
     /** 스레드의 우선순위

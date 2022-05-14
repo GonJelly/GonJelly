@@ -1,4 +1,4 @@
-package ThreadExample.chapter2;
+package book2.ThreadExample.chapter2;
 
 /** 작업 스레드를 Thread 클래스를 상속받아서 처리하기\ (하위클리스를 이용한 방법)
  *

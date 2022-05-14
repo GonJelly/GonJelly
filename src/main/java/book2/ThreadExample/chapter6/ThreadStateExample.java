@@ -1,4 +1,4 @@
-package ThreadExample.chapter6;
+package book2.ThreadExample.chapter6;
 
 public class ThreadStateExample {
 

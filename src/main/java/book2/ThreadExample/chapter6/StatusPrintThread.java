@@ -1,6 +1,4 @@
-package ThreadExample.chapter6;
-
-import java.lang.annotation.Target;
+package book2.ThreadExample.chapter6;
 
 public class StatusPrintThread extends Thread {
 

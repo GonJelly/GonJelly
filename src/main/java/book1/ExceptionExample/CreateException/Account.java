@@ -1,4 +1,4 @@
-package ExceptionExample.CreateException;
+package book1.ExceptionExample.CreateException;
 
 public class Account {
 

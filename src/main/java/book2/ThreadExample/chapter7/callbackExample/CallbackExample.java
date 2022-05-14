@@ -1,6 +1,5 @@
-package ThreadExample.chapter7.callbackExample;
+package book2.ThreadExample.chapter7.callbackExample;
 
-import javax.security.auth.callback.CallbackHandler;
 import java.nio.channels.CompletionHandler;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

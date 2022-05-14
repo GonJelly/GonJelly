@@ -1,4 +1,4 @@
-package GenericExample.chapter2;
+package book2.GenericExample.chapter2;
 
 public class Product<K,V> {
 

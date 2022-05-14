@@ -1,4 +1,4 @@
-package LambdaExample.chapter5;
+package book2.LambdaExample.chapter5;
 
 public class UsingLocalVariable {
 

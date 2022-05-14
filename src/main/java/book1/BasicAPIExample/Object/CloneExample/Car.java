@@ -1,4 +1,4 @@
-package basicAPIExample.Object.CloneExample;
+package book1.BasicAPIExample.Object.CloneExample;
 
 public class Car {
 

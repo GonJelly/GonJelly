@@ -1,4 +1,4 @@
-package ThreadExample.chapter7.chapter7_group1;
+package book2.ThreadExample.chapter7.chapter7_group1;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

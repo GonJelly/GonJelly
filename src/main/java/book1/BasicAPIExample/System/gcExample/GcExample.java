@@ -1,4 +1,4 @@
-package basicAPIExample.System.gcExample;
+package book1.BasicAPIExample.System.gcExample;
 
 public class GcExample {
 

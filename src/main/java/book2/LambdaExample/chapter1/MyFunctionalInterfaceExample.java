@@ -1,4 +1,4 @@
-package LambdaExample.chapter1;
+package book2.LambdaExample.chapter1;
 
 public class MyFunctionalInterfaceExample {
     /** 리턴값이 없는 람다식 표현하기

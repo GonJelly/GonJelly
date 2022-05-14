@@ -1,4 +1,4 @@
-package basicAPIExample.System.getEnvExample;
+package book1.BasicAPIExample.System.getEnvExample;
 
 public class SystemEnvExample {
 

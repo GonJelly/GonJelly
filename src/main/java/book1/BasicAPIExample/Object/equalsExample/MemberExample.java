@@ -1,4 +1,4 @@
-package basicAPIExample.Object.equalsExample;
+package book1.BasicAPIExample.Object.equalsExample;
 
 public class MemberExample{
 

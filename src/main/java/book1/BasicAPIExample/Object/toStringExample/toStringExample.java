@@ -1,6 +1,5 @@
-package basicAPIExample.Object.toStringExample;
+package book1.BasicAPIExample.Object.toStringExample;
 
-import java.sql.SQLOutput;
 import java.util.Date;
 
 public class toStringExample {

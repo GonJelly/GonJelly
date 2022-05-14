@@ -1,4 +1,4 @@
-package ThreadExample.chapter7.chapter7_group1;
+package book2.ThreadExample.chapter7.chapter7_group1;
 
 public class Result {
 

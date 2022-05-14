@@ -1,4 +1,4 @@
-package ThreadExample.chapter2;
+package book2.ThreadExample.chapter2;
 
 import java.awt.*;
 

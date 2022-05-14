@@ -1,4 +1,4 @@
-package basicAPIExample.System.exitExample;
+package book1.BasicAPIExample.System.exitExample;
 
 public class ExitExample {
 

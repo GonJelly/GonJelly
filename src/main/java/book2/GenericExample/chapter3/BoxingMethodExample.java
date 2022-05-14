@@ -1,4 +1,4 @@
-package GenericExample.chapter3;
+package book2.GenericExample.chapter3;
 
 public class BoxingMethodExample {
     /** 제네릭 메소드
