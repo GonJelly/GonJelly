@@ -19,6 +19,5 @@ public class Main_2563 {
         }
         /* 색종이의 좌표 end */
 
-        for(int i = 0; i <)
     }
 }
