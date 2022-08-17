@@ -1,4 +1,4 @@
-package baekjoon;
+package baekjoon.label2000;
 
 import java.io.*;
 import java.util.LinkedList;

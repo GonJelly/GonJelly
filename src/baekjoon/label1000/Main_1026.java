@@ -1,4 +1,4 @@
-package baekjoon;
+package baekjoon.label1000;
 
 import jdk.internal.util.xml.impl.Input;
 import org.w3c.dom.ls.LSInput;

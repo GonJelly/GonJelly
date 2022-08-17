@@ -1,4 +1,4 @@
-package baekjoon;
+package baekjoon.label1000;
 
 import java.util.*;
 

@@ -1,13 +1,12 @@
-package baekjoon;
+package baekjoon.label3000;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main_3040 {
+public class Main_3040_basic {
 
     static int[] dwarfSelect;
     static List<Integer> dwarfs;

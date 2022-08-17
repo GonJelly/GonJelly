@@ -10,6 +10,8 @@ import java.util.*;
 * 시간 제한 : 2초 메모리 : 128MB
 * N : 숫자의 갯수 1 <= N <= 11
 * Ai : 숫자의 범위 1 <= Ai <= 100
+* 
+* 메모리와 시간복잡도를 다시 생각해보고 다르게 해보겠음
 * */
 public class Main_14888 {
 
@@ -57,6 +59,12 @@ public class Main_14888 {
 
     }
 
+    /**
+     * 연산자의 경우의 수를 만들어주는 메서드
+     * @param temp 연산자의 경우를 저장할 공간
+     * @param cnt  연산자의 개수
+     * @param flag 사용여부 체크 플래그
+     */
     private static void expression(String[] temp,int cnt,int flag) {
 
         if( cnt == n - 1 ) {
@@ -74,9 +82,9 @@ public class Main_14888 {
                 int op2 = Integer.parseInt(q.poll());
                 result = getOperater(Integer.parseInt(result),op2,oper);
             }
-            int tmp = Integer.parseInt(result);
-            if( max < tmp) max = tmp;
-            if( min > tmp) min = tmp;
+            int tmp = Integer.parseInt(result); // 결과가 String이기 때문에 정수로 변환
+            if( max < tmp) max = tmp;       // 최댓값
+            if( min > tmp) min = tmp;       // 최솟값
             return;
         }
 
@@ -88,28 +96,40 @@ public class Main_14888 {
         }
     }
 
+    /**
+     *
+     * @param op1   피연산자1
+     * @param op2   피연산자2
+     * @param operator  연산자
+     * @return      계산결과
+     */
     private static String getOperater(int op1 , int op2, String operator) {
         switch ( operator ) {
-            case "+":
+            case "+":       // 덧셈
                 return String.valueOf(op1 + op2);
-            case "-":
+            case "-":       // 뺄셈
                 return String.valueOf(op1 - op2);
-            case "*":
+            case "*":       // 곱셈
                 return String.valueOf(op1 * op2);
-            case "/":
+            case "/":       // 나눗셈
                 int result = 0;
-                if( op1 < 0) {
+                if( op1 < 0) {  // 음수일 경우
                     op1 = -op1;
                     result = -(op1 / op2);
                     return String.valueOf(result);
                 }
-                result = (op1 / op2);
+                result = (op1 / op2);   // 양수일 경우
                 return String.valueOf(result);
             default:
                 return null;
         }
     }
 
+    /**
+     * 연산자의 갯수만큼 리스트에 삽입해주는 메소드
+     * @param order 연산자의 종류
+     * @param count 연산자의 갯수
+     */
     private static void getOperator(String order, int count) {
         for(int i = 1; i <= count; i++) {
             operators.add(order);

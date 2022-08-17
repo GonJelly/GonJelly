@@ -1,13 +1,11 @@
-package baekjoon;
+package baekjoon.label1000;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class Main_1991_Map {
+public class Main_1991 {
 
     static Map<String,char[]> nodes;
 
