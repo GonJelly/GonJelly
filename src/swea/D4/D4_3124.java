@@ -1,37 +1,28 @@
-package swea;
+package swea.D4;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class D4_3124_origin {
-
-    static class Node {
-
-        int number;  // 노드 번호
-        Node next;   // 노드 번호
-        long weight; // 가중치
-
-        public Node(int number, Node next, long weight) {
-            this.number = number;
-            this.next = next;
-            this.weight = weight;
-        }
-
-        @Override
-        public String toString() {
-            final StringBuilder sb = new StringBuilder("Node{");
-            sb.append("number=").append(number);
-            sb.append(", next=").append(next);
-            sb.append(", weight=").append(weight);
-            sb.append('}');
-            return sb.toString();
-        }
-    }
-
+/**
+ *
+ * 재수강하면서 Kruskal을 구현해보았습니다.
+ * 처음에는 List에 인접리스트를 작서하고 ...
+ * 연결된 가지를 전부 우선순위 큐(priority Queue)에 넣어서 정렬해서 처리하게끔 하였지만
+ * 몇차례 수행을 거쳐도 이상한점을 찾지 못해서 다른 학우의 코드를 참조하니
+ * List에 넣지않고 바로 우선순위 큐(priority Queue)에 삽입하여 처리하는 것을 보았습니다.
+ *
+ * [느낀점]
+ * Kruskal은 간선리스트를 가지고 처리하는데 이미 연결간선 정보와 가중치를 주는데
+ * 리스트에 넣어서 다시 그것을 큐에 넣어서 꺼내면서 처리할 필요가 있을까? 라는 생각을 해서
+ * 리스트를 전부 제거 하였습니다.
+ *
+ * @author 박준영
+ *
+ */
+public class D4_3124{
+    // 가지 정보가 들어가는 클래스
     static class Ebge implements Comparable<Ebge>{
 
         int start;
@@ -55,17 +46,8 @@ public class D4_3124_origin {
             }
         }
 
-        @Override
-        public String toString() {
-            final StringBuilder sb = new StringBuilder("Ebge{");
-            sb.append("start=").append(start);
-            sb.append(", end=").append(end);
-            sb.append(", weight=").append(weight);
-            sb.append('}');
-            return sb.toString();
-        }
     }
-
+    // kruskal 알고리즘 필요 연산 start
     private static void make(int x) {
         node[x] = x;
     }
@@ -81,6 +63,7 @@ public class D4_3124_origin {
         if ( f1 == f2 ) return;
         else node[f2] = f1;
     }
+    // kruskal 알고리즘 필요 연산 end
 
     private static int node[];
 
@@ -107,12 +90,6 @@ public class D4_3124_origin {
             // 정렬기준 ( 가중치로 오름차순으로 정렬 )
             Queue<Ebge> priorityQue = new PriorityQueue<>();// 가중치 기준으로 정렬하기 위해서 사용 (간선들 저장)
 
-//            ArrayList<Node> list = new ArrayList<>();       // 인접 리스트 생성
-//
-//            for(int i = 0; i <= v; i++) {
-//                list.add(new Node(i,null,0));
-//            }
-
             for(int x = 1; x <= e; x++) {
                 input = new StringTokenizer(in.readLine());
 
@@ -121,48 +98,28 @@ public class D4_3124_origin {
                 int c = Integer.parseInt(input.nextToken());    // 가중치
 
                 priorityQue.offer(new Ebge(a,b,c));
-
-                // 양방향성 그래프 생성
-//                Node from = list.get(a);
-//                Node to = list.get(b);
-//
-//                list.set(a, new Node(b,from,c));
-//                list.set(b, new Node(a,to,c));
             }
-            // 그래프 확인
-//            list.forEach( node -> {
-//                while ( node.next != null ) {
-////                    System.out.print(node.number + " => ");
-//                    priorityQue.offer(new Ebge(node.number, node.next.number, node.weight));
-//                    node = node.next;
-//                }
-////                System.out.println();
-//            });
-            // 정렬 확인
-//            priorityQue.forEach(System.out::println);
 
-//            System.out.println(Arrays.toString(node));
             // 간선 - 1 만큼 반복
             int count = 0;      // e - 1 간선 확인용
+            // 기저조건 : 간선이 없으면 종료
             while( !priorityQue.isEmpty() ) {
 
                 Ebge ebge = priorityQue.poll();
-//                System.out.println(ebge);
-                int start = ebge.start;
-                int end = ebge.end;
+
+                int start = ebge.start; // 시작 정점
+                int end = ebge.end;     // 종료 정점
 
                 // 같은 그룹 인지 확인
                 if ( find(start) == (find(end)) ) continue;
-
-                System.out.println(ebge);
-
-                union(start,end);
-                ans += ebge.weight;
+                
+                union(start,end);   // 부모 정점 합병
+                ans += ebge.weight; // 가중치 합산
+                // 기저조건 : 간선이 정점 - 1 개가 충족하면 종료
                 if( ++count == v - 1) break;
             }
 
-//            System.out.println(Arrays.toString(node));
-            sb.append("#" + t + " ").append(ans).append("\n");
+            sb.append("#").append(t).append(" ").append(ans).append("\n");
         }
 
         System.out.println(sb);

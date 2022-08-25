@@ -1,4 +1,4 @@
-package baekjoon;
+package baekjoon.label5000;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
