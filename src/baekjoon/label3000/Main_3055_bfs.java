@@ -1,4 +1,4 @@
-package baekjoon;
+package baekjoon.label3000;
 
 import java.io.BufferedReader;
 import java.io.IOException;
