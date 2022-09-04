@@ -1,11 +1,12 @@
 package baekjoon;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main_17281 {
+public class Main_17281_flag {
 
     private static int n, out, attacker, max;
     private static int[] position;
@@ -13,15 +14,17 @@ public class Main_17281 {
 
     public static void main(String[] args) throws IOException {
         long start = System.nanoTime();
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        FileInputStream file = new FileInputStream("./res/baekjoon/baseball.txt");
+        BufferedReader in = new BufferedReader(new InputStreamReader(file));
+//        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(in.readLine());// 이닝의 수
         position = new int[5];              // 1루, 2루, 3루에 선수가 진출했는지 확인하는 배열
         attacker = 1;                       // 타자 순서
         out = 0;                            // 아웃 횟수
-        boolean[] use = new boolean[10];    // 플레이어 선출 여부
+//        boolean[] use = new boolean[10];    // 플레이어 선출 여부
         int[] player = new int[10];         // 경기를 뛸 타자 순서
         play = new int[n+1][10];            // 각 이닝마다 선수가 취할수 있는 플레이 저장
-        use[1] = true;                      // 1번선수는 항상 4번차자이기에 미리 선출
+//        use[1] = true;                      // 1번선수는 항상 4번차자이기에 미리 선출
 
         for(int y = 1; y <= n; y++) {
             StringTokenizer st = new StringTokenizer(in.readLine());
@@ -30,13 +33,13 @@ public class Main_17281 {
             }
         }
 
-        getPlayer(1,use,player);
+        getPlayer(1,0,player);
         System.out.println(max);
         long end = System.nanoTime();
         System.out.println( ( end - start ) / 1_000 + "ms");
     }
 
-    private static void getPlayer(int cnt,boolean[] use, int[] player) {
+    private static void getPlayer(int cnt,int flag, int[] player) {
         // 경기를 뛸 선수가 정해졌으면 경기 시작
         if( cnt == 10 ) {
 //            System.out.println(Arrays.toString(player));
@@ -46,18 +49,15 @@ public class Main_17281 {
         // 4번 타자 정하기 ( 1번 선수 )
         if( cnt == 4 ) {
             player[cnt] = 1;
-            getPlayer( cnt + 1, use, player);
+            getPlayer( cnt + 1,flag | 1<<1 , player);
             return;
         }
         // 4번 타자 이외 타자순서 정하기
         for(int x = 2; x < 10; x++) {
+            if( (flag & 1<<x ) != 0 ) continue;;
             // 아직 배치하지 않은 선수라면 추가
-            if( !use[x] ) {
-                use[x] = true;
-                player[cnt] = x;
-                getPlayer(cnt + 1,use,player);
-                use[x] = false;
-            }
+            player[cnt] = x;
+            getPlayer(cnt + 1,flag | 1<<x ,player);
         }
     }
 
