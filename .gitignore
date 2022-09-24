@@ -5,7 +5,8 @@ study_algorithm\
 
 #인테리제이 모듈 설정 파일
 *.iml
-# 컴파일된 클래스 파일
+.idea/
+# 컴파일된 클래스파일
 *.class
 
 
