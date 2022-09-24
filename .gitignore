@@ -1,0 +1,12 @@
+study_algorithm\
+
+# 이클립스 환경설정 폴더
+.metadata/
+
+#인테리제이 모듈 설정 파일
+*.iml
+.idea/
+# 컴파일된 클래스파일
+*.class
+
+
