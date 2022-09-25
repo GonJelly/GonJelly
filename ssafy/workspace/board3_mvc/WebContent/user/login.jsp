@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}" />
+<c:if test="${cookie.ssafy_ck.value ne null}">
+  <c:set var="idck" value="checked"/>
+  <c:set var="saveid" value="${cookie.ssafy_ck.value}"/>
+</c:if>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -17,6 +22,18 @@
     <title>SSAFY</title>
   </head>
   <body>
+    <c:if test="${not empty Cookies.ssafy_ck}" >
+      <script>
+        let idck = document.getElementById('saveid');
+        let id = document.getElementById('userid');
+
+        console.log(idck);
+        console.log(id);
+
+        idck.setAttribute('checked',true);  // 아이디 저장 체크
+        id.value = `${Cookies.ssafy_ck}`; // 아이디 작성
+      </script>
+    </c:if>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
@@ -27,6 +44,7 @@
         <div class="col-lg-8 col-md-10 col-sm-12">
           <form id="form-login" method="POST" action="">
             <div class="form-check mb-3 float-end">
+              <input type="hidden" name="act" value="login" />
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -58,7 +76,7 @@
                 placeholder="비밀번호..."
               />
             </div>
-            <div class="text-danger mb-2"></div>
+            <div class="text-danger mb-2">${msg}</div>
             <div class="col-auto text-center">
               <button type="button" id="btn-login" class="btn btn-outline-primary mb-3">
                 로그인
@@ -78,7 +96,7 @@
     ></script>
     <script>
     document.querySelector("#btn-mv-join").addEventListener("click", function () {
-    	location.href = "${root}/user";
+    	location.href = "${root}/user?act=mvjoin";
       });
     
     document.querySelector("#btn-login").addEventListener("click", function () {

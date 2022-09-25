@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -16,6 +17,12 @@
     <title>SSAFY</title>
   </head>
   <body>
+  <c:choose>
+    <c:when test='${empty userinfo}'>
+      <c:if test="${cookie.ssafy_ck.value ne null}">
+        <c:set var="idck" value="checked"/>
+        <c:set var="saveid" value="${cookie.ssafy_ck.value}"/>
+      </c:if>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
@@ -25,7 +32,7 @@
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12">
           <form id="form-login" method="POST" action="">
-
+            <input type="hidden" name="act" value="login" />
             <div class="form-check mb-3 float-end">
               <input
                 class="form-check-input"
@@ -33,6 +40,7 @@
                 value="ok"
                 id="saveid"
                 name="saveid"
+                ${idck}
               />
               <label class="form-check-label" for="saveid"> 아이디저장 </label>
             </div>
@@ -44,6 +52,7 @@
                 id="userid"
                 name="userid"
                 placeholder="아이디..."
+                value='${saveid}'
               />
             </div>
             <div class="mb-3">
@@ -76,7 +85,7 @@
     ></script>
     <script>
       document.querySelector("#btn-mv-join").addEventListener("click", function () {
-    	location.href = "${root}/user";
+    	location.href = "${root}/user?act=mvjoin";
       });
       
       document.querySelector("#btn-login").addEventListener("click", function () {
@@ -93,9 +102,14 @@
         }
       });
     </script>
-    
+    </c:when>
+    <c:otherwise>
     <div class="container">
-
+<%--      <jsp:include page="${root}/common/confirm.jsp">--%>
+<%--        <jsp:param name="userinfo" value="${User}"/>--%>
+<%--        <jsp:param name="root" value="${root}"/>--%>
+<%--      </jsp:include>--%>
+      <%@ include file="common/confirm.jsp" %>
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
           <h2 class="my-3 py-3 shadow-sm bg-light text-center">
@@ -103,11 +117,12 @@
           </h2>
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12 text-center">
-          <a href="${root}/board">글쓰기</a><br />
-          <a href="${root}/board">글목록</a>
+          <a href="${root}/board?act=mvwrite">글쓰기</a><br />
+          <a href="${root}/board?act=list">글목록</a>
         </div>
       </div>
     </div>
-
+    </c:otherwise>
+  </c:choose>
   </body>
 </html>

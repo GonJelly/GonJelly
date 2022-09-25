@@ -2,10 +2,12 @@ package com.ssafy.member.model.service;
 
 import com.ssafy.member.model.MemberDto;
 
+import java.io.IOException;
+
 public interface MemberService {
 
-//	idCheck() throws Exception;
-//	joinMember() throws Exception;
-//	loginMember() throws Exception;
+	int idCheck(String userid) throws Exception;
+	int joinMember(MemberDto member) throws Exception;
+	MemberDto loginMember(String userid, String userpwd) throws Exception;
 	
 }

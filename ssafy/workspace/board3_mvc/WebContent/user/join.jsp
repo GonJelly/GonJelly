@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -25,7 +26,7 @@
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12">
           <form id="form-join" method="POST" action="">
-
+            <input type="hidden" name="act" value="join"/>
             <div class="mb-3">
               <label for="username" class="form-label">이름 : </label>
               <input
@@ -124,7 +125,7 @@
     ></script>
     <script>
       let isUseId = false;
-      document.querySelector("#userid").addEventListener("", function () {
+      document.querySelector("#userid").addEventListener("input", function () {
     	 let userid = this.value;
     	 let resultDiv = document.querySelector("#idcheck-result");
     	 if(userid.length < 6 || userid.length > 16) {
@@ -132,17 +133,22 @@
     		 resultDiv.textContent = "아이디는 6자 이상 16자 이하 입니다.";
     		 isUseId = false;
     	 } else {
-
-    			 if(data == 0) {
-    			   resultDiv.setAttribute("class", "mb-3 text-primary");
-    		       resultDiv.textContent = userid + "는 사용할 수 있습니다.";
-    		       isUseId = true;
-    			 } else {
-    			   resultDiv.setAttribute("class", "mb-3 text-danger");
-      		       resultDiv.textContent = userid + "는 사용할 수 없습니다.";
-      		       isUseId = false;
-    			 }
-
+           let uri = 'user';
+           let param = 'act=idCheck';
+           fetch(`${root}/\${uri}?\${param}&userid=\${userid}`)
+                   .then(response => response.text() )
+                   .then(data => {
+                     console.log(data);
+                           if(data == 1) {
+                             resultDiv.setAttribute("class", "mb-3 text-primary");
+                             resultDiv.textContent = userid + "는 사용할 수 있습니다.";
+                             isUseId = true;
+                           } else {
+                             resultDiv.setAttribute("class", "mb-3 text-danger");
+                             resultDiv.textContent = userid + "는 사용할 수 없습니다.";
+                             isUseId = false;
+                           }
+                    });
     	 }
       });
       

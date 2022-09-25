@@ -92,3 +92,11 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+select * from members;
+
+select count(*) as cnt from members
+where user_id = 'admin';
+
+insert into members(user_name,user_id,user_password,email_id,email_domain,join_date)
+value ('박준영','ssafy8','1234','ssafy','naver.com',NOW());
