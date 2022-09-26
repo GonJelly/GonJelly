@@ -138,7 +138,7 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("msg","입력된 정보가 잘못되었습니다.");
 				return "user/join.jsp";
 			}
-		}	catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();

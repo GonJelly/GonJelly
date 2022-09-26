@@ -2,7 +2,7 @@
 <%@ include file="/common/header.jsp" %>
 <c:if test="${articles == null}">
 	<script type="text/javascript">
-		alert("정상적인 URL 접근이 아닙니.");
+		alert("정상적인 URL 접근이 아닙니다.");
 		location.href = "${root}/board?act=list&pgno=1&key=&word=";
 	</script>
 </c:if>
@@ -48,24 +48,24 @@
               </tr>
             </thead>
             <tbody>
-
+            <c:forEach var="article" items="${articles}">
               <tr class="text-center">
-                <th scope="row">글번호</th>
+                <th scope="row">${article.articleNo}</th>
                 <td class="text-start">
                   <a
-                    href="#"
+                    href="${root}/board?act=view&articleNo=${article.articleNo}"
                     class="article-title link-dark"
                     data-no="글번호"
                     style="text-decoration: none"
                   >
-                    	제목
+                    	${article.subject}
                   </a>
                 </td>
-                <td>작성자</td>
-                <td>조회수</td>
-                <td>작성일</td>
+                <td>${article.userId}</td>
+                <td>${article.hit}</td>
+                <td>${article.registerTime}</td>
               </tr>
-
+            </c:forEach>
             </tbody>
           </table>
         </div>

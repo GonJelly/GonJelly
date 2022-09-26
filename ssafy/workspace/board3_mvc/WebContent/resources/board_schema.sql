@@ -94,9 +94,19 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 select * from members;
+select * from board
+order by register_time desc,article_no desc
+limit 20;
 
 select count(*) as cnt from members
 where user_id = 'admin';
 
 insert into members(user_name,user_id,user_password,email_id,email_domain,join_date)
 value ('박준영','ssafy8','1234','ssafy','naver.com',NOW());
+
+insert into board (user_id, subject, content, hit, register_time)
+value ('ssafy8','test01','test01 article ....',0,now());
+
+update board set subject='test05' where article_no=41;
+
+

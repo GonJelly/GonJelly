@@ -23,17 +23,17 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int writeArticle(BoardDto boardDto) throws Exception {
-		return 0;
+		return boardDao.writeArticle(boardDto);
 	}
 
 	@Override
 	public List<BoardDto> listArticle(Map<String, String> map) throws Exception {
-		return null;
+		return boardDao.listArticle(map);
 	}
 
 	@Override
 	public BoardDto getArticle(int articleNo) throws Exception {
-		return null;
+		return boardDao.getArticle(articleNo);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void modifyArticle(BoardDto boardDto) throws Exception {
-		
+		boardService.modifyArticle(boardDto);
 	}
 
 	@Override

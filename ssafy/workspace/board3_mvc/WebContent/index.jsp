@@ -118,7 +118,7 @@
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12 text-center">
           <a href="${root}/board?act=mvwrite">글쓰기</a><br />
-          <a href="${root}/board?act=list">글목록</a>
+          <a href="${root}/board?act=list&pgno=1&key=&word=">글목록</a>
         </div>
       </div>
     </div>

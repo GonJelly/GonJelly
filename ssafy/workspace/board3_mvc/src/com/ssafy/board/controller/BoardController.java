@@ -2,6 +2,7 @@ package com.ssafy.board.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class BoardController extends HttpServlet {
 			redirect(request, response, path);
 		} else if("write".equals(act)) {
 			path = write(request, response);
-			forward(request, response, path);
+			redirect(request, response, path);
 		} else if("view".equals(act)) {
 			path = view(request, response);
 			forward(request, response, path);
@@ -76,15 +77,77 @@ public class BoardController extends HttpServlet {
 	}
 
 	private String list(HttpServletRequest request, HttpServletResponse response) {
-		return "";
+
+		Map<String,String> map = new HashMap<>();
+
+		map.put("pageNo",request.getParameter("pgno"));
+		map.put("key",request.getParameter("key"));
+		map.put("word",request.getParameter("word"));
+
+		try {
+			List<BoardDto> list = boardService.listArticle(map);
+			request.setAttribute("articles",list);
+			return request.getContextPath() + "board/list.jsp";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error/error.jsp";
+		}
 	}
 
 	private String write(HttpServletRequest request, HttpServletResponse response) {
-		return "";
+
+		HttpSession session = request.getSession(false);
+		MemberDto user = new MemberDto();
+		if( session != null ) {
+			user = (MemberDto) session.getAttribute("userinfo");
+		}
+		try {
+			String userid = user.getUserId();
+			String subject = request.getParameter("subject");
+			String content = request.getParameter("content");
+
+			BoardDto boardDto = new BoardDto();
+
+			boardDto.setUserId(userid);
+			boardDto.setSubject(subject);
+			boardDto.setContent(content);
+			int result = 0;
+			for(int i = 0; i < 20; i++) {
+				result = boardService.writeArticle(boardDto);
+			}
+			if ( result > 0) {
+				System.out.println("정상적으로 입력되었습니다.");
+				return request.getContextPath() + "/board?act=list";
+			} else {
+				System.out.println("글작성이 실패");
+				return request.getContextPath() + "/board/act=mvwrite";
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "error/error.jsp";
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("글작성 중 오류가 발생하였습니다.");
+			return "error/error.jsp";
+		}
 	}
 	
 	private String view(HttpServletRequest request, HttpServletResponse response) {
-		return "";
+
+		int articleNo = Integer.parseInt(request.getParameter("articleNo"));
+
+		try {
+			BoardDto board = boardService.getArticle(articleNo);
+			request.setAttribute("article",board);
+			return request.getContextPath() + "/board/view.jsp";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "error/error.jsp";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error/error.jsp";
+		}
 	}
 
 	private String mvModify(HttpServletRequest request, HttpServletResponse response) {
