@@ -1,14 +1,21 @@
 package com.ssafy.apt.model.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
-import com.ssafy.apt.model.dto.AptDto;
-import com.ssafy.apt.model.dto.CityDto;
+import com.ssafy.apt.model.dto.*;
 
 public interface AptService {
 
-    void saveApt(int pageNo,int numOfRows,String LAWD_CD,String DEAL_YMD);
-    List<AptDto> getApt(String DEAL_YMD, String regcode);
+    List<HouseInfoDto> getApt(String DEAL_YMD, String regcode);
     int addCity(CityDto city) throws Exception;
     List<CityDto> getCityList() throws Exception;
+    int addDong(List<DongDto> dong) throws Exception;
+    List<DongDto> getDong(String SigunguCode) throws Exception;
+    int addRoad(Set<RoadDto> set) throws Exception;
+    int addHouse(List<HouseInfoDto> list) throws Exception;
+    boolean isVailable(String Road_Code,String Road_Seq) throws Exception;
+    Map<String, Object> getCityDong() throws Exception;
 }

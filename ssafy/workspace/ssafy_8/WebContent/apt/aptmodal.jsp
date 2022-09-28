@@ -14,8 +14,8 @@
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../../css/styles.css" rel="stylesheet" />
-    <link href="../../css/apt.css" rel="stylesheet" />
+    <link href="${root}/css/styles.css" rel="stylesheet" />
+    <link href="${root}/css/apt.css" rel="stylesheet" />
 </head>
 <body id="page-top">
 <script>
@@ -39,8 +39,8 @@
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="../../js/scripts.js"></script>
+<script src="${root}/js/scripts.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7de9f8e544cd2366ea5e0037853b3216&libraries=services"></script>
-<script src="../../js/kakaoMap.js"></script>
+<script src="${root}/js/kakaoMap.js"></script>
 </body>
 </html>

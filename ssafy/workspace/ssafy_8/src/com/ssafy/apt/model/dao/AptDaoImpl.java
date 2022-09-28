@@ -1,15 +1,10 @@
 package com.ssafy.apt.model.dao;
 
-import com.ssafy.apt.model.dto.AptDto;
-import com.ssafy.apt.model.dto.CityDto;
+import com.ssafy.apt.model.dto.*;
 import com.ssafy.sample.util.DBUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 
 public class AptDaoImpl implements  AptDao{
@@ -21,21 +16,21 @@ public class AptDaoImpl implements  AptDao{
     }
 
     @Override
-    public List<AptDto> getApt(String _DEAL_YMD, String _regcode) {
+    public List<HouseInfoDto> getApt(String _DEAL_YMD, String _regcode) {
 
         Connection conn = null;
         PreparedStatement psmt = null;
         ResultSet rs = null;
         int idx = 0;
-        List<AptDto> list = new ArrayList<>();
+        List<HouseInfoDto> list = new ArrayList<>();
 
         try {
-
-
             StringBuilder sql = new StringBuilder();
             sql.append("select * \n");
-            sql.append("from apt \n");
-            sql.append("where DEAL_YMD = ? and regcode = ?");
+            sql.append("from HouseInfo \n");
+            sql.append("where DEAL_YMD = ? and regcode = ? \n");
+            sql.append("order by Deal_Day desc \n");
+            sql.append("limit 1");
 
             conn = db.getConnection();
             psmt = conn.prepareStatement(sql.toString());
@@ -61,55 +56,13 @@ public class AptDaoImpl implements  AptDao{
                 String Bonbun = rs.getString("Bonbun");
                 String Bubun = rs.getString("Jibun");
 
-                AptDto dto = new AptDto(code,LAWD_CD,DEAL_YMD,Deal_Amount,regcode,Eubmyudong,Dong,AptName,AreaExUse,Jibun,Floor,Build_Year,Read_Name,Bonbun,Bubun);
-                list.add(dto);
+                HouseInfoDto dto = null;
             }
         } catch (SQLException e) {
             e.printStackTrace();;
         } finally {
             db.close(rs,psmt,conn);
             return list;
-        }
-    }
-
-    @Override
-    public int saveApt(AptDto aptDto) {
-
-        Connection conn = null;
-        PreparedStatement psmt = null;
-        int result = 0;
-
-        try {
-
-            StringBuilder sql = new StringBuilder();
-            sql.append("insert into apt(code, lawd_cd, deal_ymd, deal_amount, regcode, eubmyudong, dong, aptName, areaExUse, jibun, floor, build_Year, read_Name, bonbun, bubun) \n");
-            sql.append("value(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            int idx = 0;
-            conn = db.getConnection();
-            psmt = conn.prepareStatement(sql.toString());
-
-            psmt.setString(++idx,aptDto.getCode());
-            psmt.setString(++idx,aptDto.getLAWD_CD());
-            psmt.setString(++idx,aptDto.getDEAL_YMD());
-            psmt.setString(++idx,aptDto.getDeal_Amount());
-            psmt.setString(++idx,aptDto.getRegcode());
-            psmt.setString(++idx,aptDto.getEubmyudong());
-            psmt.setString(++idx,aptDto.getDong());
-            psmt.setString(++idx,aptDto.getAptName());
-            psmt.setString(++idx,aptDto.getAreaExUse());
-            psmt.setString(++idx,aptDto.getJibun());
-            psmt.setString(++idx,aptDto.getFloor());
-            psmt.setString(++idx,aptDto.getBuild_Year());
-            psmt.setString(++idx,aptDto.getRead_Name());
-            psmt.setString(++idx,aptDto.getBonbun());
-            psmt.setString(++idx,aptDto.getBubun());
-
-            result = psmt.executeUpdate();
-        } catch(SQLException e) {
-            e.printStackTrace();
-        } finally {
-            db.close(psmt,conn);
-            return result;
         }
     }
 
@@ -138,12 +91,13 @@ public class AptDaoImpl implements  AptDao{
 
         StringBuilder sql = new StringBuilder();
         sql.append("select Sigungu_code, city_sido, city_gungu \n");
-        sql.append("from city");
+        sql.append("from city \n");
+        sql.append("order by Sigungu_code asc");
 
         List<CityDto> list = new ArrayList<>();
         Connection conn = db.getConnection();
-        PreparedStatement pstmt = conn.prepareStatement(sql.toString());
-        ResultSet rs = pstmt.executeQuery();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql.toString());
 
         while ( rs.next() ) {
             CityDto city = new CityDto();
@@ -154,8 +108,196 @@ public class AptDaoImpl implements  AptDao{
             list.add(city);
         }
 
-        db.close(rs,pstmt,conn);
+        db.close(rs,stmt,conn);
         return list;
+    }
+
+    @Override
+    public int addDong(List<DongDto> list) throws SQLException {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("insert into dong ( Sigungu_code, Eubmyundong_code, Dong)\n");
+        sql.append("values (?, ?, ?)");
+        for( int x = 0; x < list.size() - 1; x++) {
+            sql.append(", (?, ?, ?)");
+        }
+
+        int idx = 0;
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+
+        for( DongDto dong : list) {
+            pstmt.setString(++idx, dong.getSigungu_code());
+            pstmt.setString(++idx, dong.getEubmyundong_code());
+            pstmt.setString(++idx, dong.getDong());
+        }
+        int result = pstmt.executeUpdate();
+        db.close(pstmt,conn);
+        return result;
+    }
+
+    @Override
+    public List<DongDto> getDong(String SigunguCode) throws SQLException {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("select Sigungu_code, Eubmyundong_code, Dong \n");
+        sql.append("from dong \n");
+        sql.append("order by Eubmyundong_code asc");
+
+        List<DongDto> list = new ArrayList<>();
+        Connection conn = db.getConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql.toString());
+
+        while ( rs.next() ) {
+
+            DongDto dong = new DongDto();
+            dong.setSigungu_code(rs.getString("Sigungu_code"));
+            dong.setEubmyundong_code(rs.getString("Eubmyundong_code"));
+            dong.setDong(rs.getString("Dong"));
+
+            list.add(dong);
+        }
+
+        db.close(rs,stmt,conn);
+        return list;
+    }
+
+    @Override
+    public int addHouse(List<HouseInfoDto> list) throws SQLException {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("insert into houseInfo ( house_Code\n" +
+                ",house_Name\n" +
+                ",build_Year\n" +
+                ",Deal_Year\n" +
+                ",Deal_Month\n" +
+                ",Deal_Day\n" +
+                ",Deal_Amount\n" +
+                ",Use_Area\n" +
+                ",Floor\n" +
+                ",Sigungu_code\n" +
+                ",Eubmyundong_code\n" +
+                ",Road_code\n" +
+                ",Bonbun\n" +
+                ",Bubun\n" +
+                ",Jibun)\n");
+        sql.append("values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        for( int x = 0; x < list.size() - 1; x++) {
+            sql.append(", (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        }
+
+        int idx = 0;
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+
+        for(HouseInfoDto house : list) {
+
+            pstmt.setString(++idx, house.getHouse_Code());
+            pstmt.setString(++idx, house.getHouse_Name());
+            pstmt.setString(++idx, house.getBuild_Year());
+            pstmt.setString(++idx, house.getDeal_Year());
+            pstmt.setString(++idx, house.getDeal_Month());
+            pstmt.setString(++idx, house.getDeal_Day());
+            pstmt.setString(++idx, house.getDeal_Amount());
+            pstmt.setString(++idx, house.getUse_Area());
+            pstmt.setString(++idx, house.getFloor());
+            pstmt.setString(++idx, house.getSigungu_code());
+            pstmt.setString(++idx, house.getEubmyundong_code());
+            pstmt.setString(++idx, house.getRoad_code());
+            pstmt.setString(++idx, house.getBonbun());
+            pstmt.setString(++idx, house.getBubun());
+            pstmt.setString(++idx, house.getJibun());
+
+        }
+
+        int result = pstmt.executeUpdate();
+        db.close(pstmt,conn);
+        return result;
+
+    }
+
+    @Override
+    public int addRoad(Set<RoadDto> set) throws SQLException {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("insert into road(Road_code\n" +
+                ",Road_Seq\n" +
+                ",Sigungu_Code\n" +
+                ",Road_Bonbun\n" +
+                ",Road_Bubun\n" +
+                ",Road_Basement_Code\n" +
+                ",Road_Name)\n");
+        sql.append("values (?, ?, ?, ?, ?, ?, ?)");
+        for( int x = 0; x < set.size() - 1; x++) {
+            sql.append(", (?, ?, ?, ?, ?, ?, ?)");
+        }
+
+        int idx = 0;
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+        Iterator<RoadDto> iterator = set.iterator();
+
+        while ( iterator.hasNext() ) {
+            RoadDto road = iterator.next();
+            System.out.println(road);
+            pstmt.setString(++idx, road.getRoad_code());
+            pstmt.setString(++idx, road.getRoad_Seq());
+            pstmt.setString(++idx, road.getSigungu_Code());
+            pstmt.setString(++idx, road.getRoad_Bonbun());
+            pstmt.setString(++idx, road.getRoad_Bubun());
+            pstmt.setString(++idx, road.getRoad_Basement_Code());
+            pstmt.setString(++idx, road.getRoad_Name());
+        }
+        int result = pstmt.executeUpdate();
+        db.close(pstmt,conn);
+        return result;
+    }
+
+    @Override
+    public RoadDto getRoad(String Road_code, String Road_Seq) throws SQLException {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("select * \n");
+        sql.append("from road \n");
+        sql.append("where Road_code = ? and \n");
+        sql.append("      Road_Seq = ?");
+
+
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+
+        pstmt.setString(1,Road_code);
+        pstmt.setString(2,Road_Seq);
+
+        ResultSet rs = pstmt.executeQuery();
+        while ( rs.next() ) {
+            RoadDto road = new RoadDto();
+
+            road.setRoad_code(rs.getString("Road_code"));
+            road.setRoad_Seq(rs.getString("Road_Seq"));
+            road.setRoad_Name(rs.getString("Road_Name"));
+
+            db.close(rs,pstmt,conn);
+            return road;
+        }
+
+        db.close(rs,pstmt,conn);
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getCityDong() throws SQLException {
+
+        Map<String,Object> cityDong = new HashMap<>();
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("select * \n");
+        sql.append("from dong, city \n");
+        sql.append("where Road_code = ? and \n");
+        sql.append("      Road_Seq = ?");
+
+        return null;
     }
 
     public static AptDaoImpl getInstance() {

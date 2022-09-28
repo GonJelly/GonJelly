@@ -6,20 +6,20 @@
 	<c:set var="id_ck" value="checked"></c:set>
 	<c:set var="sv_id" value="${cookie.remeber_id.value}"></c:set>
 </c:if>
-			<%@ include file="/include/header.jsp" %>
+	<%@ include file="/include/header.jsp" %>
 	   	
-			<form id="form-login" method="POST" action="">
-				<input type="hidden" name="action" value="login">
+	<form id="form-login" method="POST" action="">
+		<input type="hidden" name="action" value="login">
 				
-                <div class="d-flex justify-content-center" style="margin-top: 30px">
-                    <h1>구해줘 홈즈</h1>
-                </div>
+	           <div class="d-flex justify-content-center" style="margin-top: 30px">
+	               <h1>구해줘 홈즈</h1>
+	           </div>
 
-                <br>
-				<hr>
-                <br>
-                <br> 
-                
+            <br>
+			<hr>
+            <br>
+            <br> 
+            
                 <div class="d-flex justify-content-center">
                     <h1 class="h3 mb-3 fw-normal">로그인</h1>
                 </div>
