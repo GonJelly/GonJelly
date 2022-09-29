@@ -98,6 +98,16 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`houseinfo` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
+CREATE TABLE IF NOT EXISTS `happyhouse`.`member` (
+  memberId VARCHAR(45) NOT NULL,
+  memberPw VARCHAR(45) NOT NULL,
+  name VARCHAR(45) NOT NULL,
+  mobile VARCHAR(45) NOT NULL,
+  email VARCHAR(45) NOT NULL,
+  age VARCHAR(45) NULL,
+  entryDate VARCHAR(45) NULL,
+  PRIMARY KEY (memberId))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `happyhouse`.`like`
