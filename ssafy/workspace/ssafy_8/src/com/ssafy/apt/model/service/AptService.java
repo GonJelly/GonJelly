@@ -17,5 +17,6 @@ public interface AptService {
     int addRoad(Set<RoadDto> set) throws Exception;
     int addHouse(List<HouseInfoDto> list) throws Exception;
     boolean isVailable(String Road_Code,String Road_Seq) throws Exception;
-    Map<String, Object> getCityDong() throws Exception;
+    Map<String, Integer> getCity() throws Exception;
+    Map<String, String> getGungu(String sidoCode) throws Exception;
 }

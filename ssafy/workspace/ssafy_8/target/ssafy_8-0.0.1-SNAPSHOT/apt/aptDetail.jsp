@@ -22,7 +22,7 @@
     flag = 0;
 </script>
 <!-- nav -->
-<%@ include file="/include/nav_session_nn.jsp"%>
+<%@ include file="/include/nav.jsp"%>
 <!-- Header-->
 <header class="aptsearch d-flex align-items-center">
     <div class="container px-4 px-lg-5 text-center">

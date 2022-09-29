@@ -43,6 +43,9 @@
             <div class="col col-md-auto">
                 <select name="sido" id="sido">
                     <option value="">시,도[선택]</option>
+                    <c:forEach var="item" items="${sido}">
+                        <option id="" value="${item.value}">${item.key}</option>
+                    </c:forEach>
                 </select>
             </div>
             <div class="col col-md-auto">

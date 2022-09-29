@@ -31,6 +31,14 @@
 		    <div class="container px-4 px-lg-5 text-center">
 		        <h1 class="mb-10">구해줘 홈즈</h1>
 		        <h3 class="mb-5"><em>help homes</em></h3>
+                <c:if test="${user_session ne null}">
+                <input class="btn btn-info"
+                       type="button"
+                       name="loadingBtn"
+                       id="loadingBtn"
+                       value="아파트 데이터 수집" onclick="javascript:location.href = '${root}/ControllerApt?action=loading'"
+                />
+                </c:if>
 		    </div>
 		</header>
         

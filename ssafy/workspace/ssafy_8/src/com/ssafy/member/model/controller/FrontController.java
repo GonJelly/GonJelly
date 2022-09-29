@@ -46,6 +46,8 @@ public class FrontController extends HttpServlet {
 			response.setContentType("text/plain;charset=utf-8");
 			PrintWriter out_id = response.getWriter();
 			out_id.println(cnt);
+			out_id.close();
+			break;
 		case "memberRegist":
 			memberRegist(request, response);
 			break;

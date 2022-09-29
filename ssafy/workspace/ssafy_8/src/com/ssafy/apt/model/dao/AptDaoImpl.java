@@ -137,29 +137,38 @@ public class AptDaoImpl implements  AptDao{
     }
 
     @Override
-    public List<DongDto> getDong(String SigunguCode) throws SQLException {
+    public List<DongDto> getDong(String sigunguCode) throws SQLException {
 
-        StringBuilder sql = new StringBuilder();
-        sql.append("select Sigungu_code, Eubmyundong_code, Dong \n");
-        sql.append("from dong \n");
-        sql.append("order by Eubmyundong_code asc");
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<DongDto> list = null;
+        try {
+            list = new ArrayList<>();
+            StringBuilder sql = new StringBuilder();
+            sql.append("select Sigungu_code, Eubmyundong_code, Dong \n");
+            sql.append("from dong \n");
+            sql.append("where Sigungu_code = ? \n");
+            sql.append("order by Eubmyundong_code asc");
 
-        List<DongDto> list = new ArrayList<>();
-        Connection conn = db.getConnection();
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql.toString());
+            conn = db.getConnection();
+            pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setString(1, sigunguCode);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
 
-        while ( rs.next() ) {
+                DongDto dong = new DongDto();
+                dong.setSigungu_code(rs.getString("Sigungu_code"));
+                dong.setEubmyundong_code(rs.getString("Eubmyundong_code"));
+                dong.setDong(rs.getString("Dong"));
 
-            DongDto dong = new DongDto();
-            dong.setSigungu_code(rs.getString("Sigungu_code"));
-            dong.setEubmyundong_code(rs.getString("Eubmyundong_code"));
-            dong.setDong(rs.getString("Dong"));
+                list.add(dong);
 
-            list.add(dong);
+            }
+        } finally {
+            db.close(rs,pstmt,conn);
         }
 
-        db.close(rs,stmt,conn);
         return list;
     }
 
@@ -263,7 +272,6 @@ public class AptDaoImpl implements  AptDao{
         sql.append("where Road_code = ? and \n");
         sql.append("      Road_Seq = ?");
 
-
         Connection conn = db.getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 
@@ -287,21 +295,57 @@ public class AptDaoImpl implements  AptDao{
     }
 
     @Override
-    public Map<String, Object> getCityDong() throws SQLException {
+    public Map<String, Integer> getCity() throws SQLException {
 
-        Map<String,Object> cityDong = new HashMap<>();
-
+        Map<String,Integer> map  = new HashMap<>();;
         StringBuilder sql = new StringBuilder();
-        sql.append("select * \n");
-        sql.append("from dong, city \n");
-        sql.append("where Road_code = ? and \n");
-        sql.append("      Road_Seq = ?");
+        sql.append("select distinct substring(Sigungu_Code,1,2) as sidoCode \n");
+        sql.append("        , substring_index(city_sido,' ',1) as sidoName \n");
+        sql.append("from city");
 
-        return null;
+        Connection conn = db.getConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql.toString());
+
+        while ( rs.next() ) {
+            map.put(rs.getString("sidoName"),rs.getInt("sidoCode"));
+        }
+
+        db.close(rs,stmt,conn);
+        return map;
     }
 
     public static AptDaoImpl getInstance() {
         return instance;
     }
 
+    @Override
+    public Map<String, String> getGungu(String sidoCode) throws SQLException {
+
+        Map<String, String> map = new HashMap<>();
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+
+            StringBuilder sql = new StringBuilder();
+            sql.append("select Sigungu_code as sigunguCode, city_gungu as gungu \n");
+            sql.append("from city \n");
+            sql.append("where Sigungu_code like ?");
+
+            conn = db.getConnection();
+            pstmt = conn.prepareStatement(sql.toString());
+
+            pstmt.setString(1,sidoCode + "%");
+
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                map.put(rs.getString("gungu"), rs.getString("sigunguCode"));
+            }
+        } finally {
+            db.close(rs,pstmt,conn);
+        }
+        return map;
+    }
 }

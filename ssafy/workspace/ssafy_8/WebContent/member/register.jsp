@@ -86,30 +86,31 @@
           <%@ include file="/include/footer.jsp" %> 
     <script>
     
-	    document.querySelector("#memberId").addEventListener("keyup", function () {
-		     	 let memberId = this.value;
-		    	 let resultDiv = document.querySelector("#idcheck-result");
-
-		    	 if(memberId.length == 0) {
-	      			 resultDiv.setAttribute("class", "");
-		    		 resultDiv.textContent = "";
-		    		 isUseId = true;
-		    	 } else {
-		    		fetch("${root}/controller?action=idcheck&memberId=" + memberId)
-					.then(response => response.text())
-					.then(data => {
-		    			 if(data == 0) {
-		    				 console.log(data);
-		      			   resultDiv.setAttribute("class", "d-flex justify-content-center mb-3 text-primary");
-		      		       resultDiv.textContent = memberId + "는 사용할 수 있습니다.";
-		      		       isUseId = true;
-		      			 } else {
-		      			   resultDiv.setAttribute("class", "d-flex justify-content-center mb-3 text-danger");
-		       		       resultDiv.textContent = memberId + "는 사용할 수 없습니다.";
-	        		       isUseId = false;
-		      			 }
-					});
-		    	 }
+	    document.querySelector("#memberId").addEventListener("input", function () {
+                    let userid = this.value;
+                    let resultDiv = document.querySelector("#idcheck-result");
+                    if(userid.length < 6 || userid.length > 16) {
+                        resultDiv.setAttribute("class", "mb-3 text-dark text-center");
+                        resultDiv.textContent = "아이디는 6자 이상 16자 이하 입니다.";
+                        isUseId = false;
+                    } else {
+                        let uri = 'controller';
+                        let param = 'action=idcheck!';
+                        fetch(`${root}/\${uri}?\${param}&memberId=\${userid}`)
+                            .then(response => response.text() )
+                            .then(data => {
+                                console.log(data);
+                                if(data == 0) {
+                                    resultDiv.setAttribute("class", "mb-3 text-primary text-center");
+                                    resultDiv.textContent = userid + "는 사용할 수 있습니다.";
+                                    isUseId = true;
+                                } else {
+                                    resultDiv.setAttribute("class", "mb-3 text-danger text-center");
+                                    resultDiv.textContent = userid + "는 사용할 수 없습니다.";
+                                    isUseId = false;
+                                }
+                            });
+                    }
 		      });
 	    
 	    document.querySelector("#btn-join").addEventListener("click", function () {

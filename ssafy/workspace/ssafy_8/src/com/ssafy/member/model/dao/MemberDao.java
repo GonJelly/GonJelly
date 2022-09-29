@@ -74,6 +74,7 @@ public class MemberDao {
 	 * @return 로그인 회원정보, 미존재시 null
 	 */
 	public Member login(String memberId, String memberPw) {
+		Member member = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -83,7 +84,7 @@ public class MemberDao {
 			conn = dbutil.getConnection();
 			
 			// 3. SQL 실행 통로 개설 : 전용통로, 통로 객체 생성시에 sql 구문을 지정
-			String sql = "select * from member where member_id=? and member_pw=?";
+			String sql = "select * from member where memberId=? and memberPw=?";
 			pstmt = conn.prepareStatement(sql);
 			
 			// 전용통로의 ?에 매핑되는 값을 설정
@@ -93,7 +94,17 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			// SQL 실행 결과처리
 			if (rs.next()) {
-				return new Member(memberId, memberPw);
+
+				member = new Member();
+
+				member.setMemberId(rs.getString("memberId"));
+				member.setMemberPw(rs.getString("memberPw"));
+				member.setName(rs.getString("name"));
+				member.setMobile(rs.getString("mobile"));
+				member.setEmail(rs.getString("email"));
+				member.setAge(rs.getInt("age"));
+				member.setEntryDate(rs.getString("entryDate"));
+
 			}
 			
 		} catch (SQLException e) {
@@ -101,18 +112,10 @@ public class MemberDao {
 		} finally {
 			// Factory 자원해제 위임
 			dbutil.close(conn, pstmt, rs);
+			return member;
 		}
-		
-		return null;
 	}
-	
-	
-	
-	/**
-	 * 회원가입
-	 * @param Member dto
-	 * @return 
-	 */
+
 	public int memberRegist(Member dto) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -211,7 +214,7 @@ public class MemberDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("select count(member_id) \n");
 			sql.append("from member \n");
-			sql.append("where member_id=?");
+			sql.append("where memberId=?");
 			
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, memberId);

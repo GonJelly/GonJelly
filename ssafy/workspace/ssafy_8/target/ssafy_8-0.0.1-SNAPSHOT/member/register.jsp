@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
-			<%@ include file="/include/header.jsp" %> 
+			<%@ include file="/include/header.jsp" %>
+
 			<form id="form-login" method="POST" action="">
 				<input type="hidden" name="action" value="login">
 				
@@ -85,30 +86,31 @@
           <%@ include file="/include/footer.jsp" %> 
     <script>
     
-	    document.querySelector("#memberId").addEventListener("keyup", function () {
-		     	 let memberId = this.value;
-		    	 let resultDiv = document.querySelector("#idcheck-result");
-
-		    	 if(memberId.length == 0) {
-	      			 resultDiv.setAttribute("class", "");
-		    		 resultDiv.textContent = "";
-		    		 isUseId = true;
-		    	 } else {
-		    		fetch("${root}/controller?action=idcheck&memberId=" + memberId)
-					.then(response => response.text())
-					.then(data => {
-		    			 if(data == 0) {
-		    				 console.log(data);
-		      			   resultDiv.setAttribute("class", "d-flex justify-content-center mb-3 text-primary");
-		      		       resultDiv.textContent = memberId + "는 사용할 수 있습니다.";
-		      		       isUseId = true;
-		      			 } else {
-		      			   resultDiv.setAttribute("class", "d-flex justify-content-center mb-3 text-danger");
-		       		       resultDiv.textContent = memberId + "는 사용할 수 없습니다.";
-	        		       isUseId = false;
-		      			 }
-					});
-		    	 }
+	    document.querySelector("#memberId").addEventListener("input", function () {
+                    let userid = this.value;
+                    let resultDiv = document.querySelector("#idcheck-result");
+                    if(userid.length < 6 || userid.length > 16) {
+                        resultDiv.setAttribute("class", "mb-3 text-dark text-center");
+                        resultDiv.textContent = "아이디는 6자 이상 16자 이하 입니다.";
+                        isUseId = false;
+                    } else {
+                        let uri = 'controller';
+                        let param = 'action=idcheck!';
+                        fetch(`${root}/\${uri}?\${param}&memberId=\${userid}`)
+                            .then(response => response.text() )
+                            .then(data => {
+                                console.log(data);
+                                if(data == 0) {
+                                    resultDiv.setAttribute("class", "mb-3 text-primary text-center");
+                                    resultDiv.textContent = userid + "는 사용할 수 있습니다.";
+                                    isUseId = true;
+                                } else {
+                                    resultDiv.setAttribute("class", "mb-3 text-danger text-center");
+                                    resultDiv.textContent = userid + "는 사용할 수 없습니다.";
+                                    isUseId = false;
+                                }
+                            });
+                    }
 		      });
 	    
 	    document.querySelector("#btn-join").addEventListener("click", function () {
@@ -138,7 +140,7 @@
 	      });
 	    
     </script>
-    <script src="js/register.js"></script>
+    <script src="${root}/js/register.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 

@@ -41,15 +41,6 @@ public class AptServiceImpl implements AptService{
         return dao.getApt(DEAL_YMD, regcode);
     }
 
-    private static Element getElement(String url) throws ParserConfigurationException, SAXException, IOException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document parser = builder.parse(url);
-        Element element = parser.getDocumentElement();
-        element.toString();
-        return element;
-    }
-
     @Override
     public int addCity(CityDto city) throws Exception {
         return dao.addCity(city);
@@ -78,6 +69,7 @@ public class AptServiceImpl implements AptService{
 
     @Override
     public int addHouse(List<HouseInfoDto> list) throws Exception {
+        if( list.size() == 0 ) return 0;
         return dao.addHouse(list);
     }
 
@@ -89,8 +81,12 @@ public class AptServiceImpl implements AptService{
     }
 
     @Override
-    public Map<String, Object> getCityDong() throws Exception {
-        return null;
+    public Map<String, Integer> getCity() throws Exception {
+        return dao.getCity();
+    }
+    @Override
+    public Map<String, String> getGungu(String sidoCode) throws Exception {
+        return dao.getGungu(sidoCode);
     }
 
     //    @Override

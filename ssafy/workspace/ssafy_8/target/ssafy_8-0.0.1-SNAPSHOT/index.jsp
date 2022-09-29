@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,20 +23,22 @@
         <script>
             flag = 0;
         </script>
-        
-        <c:if test="${user_session == null}">
-	       <%@ include file="/include/nav_session_null.jsp" %>
-   		</c:if>
-   		
-   		<c:if test="${user_session != null}">
-	        <%@ include file="/include/nav_session_nn.jsp" %>
-   		</c:if>
+
+        <%@ include file="/include/nav.jsp" %>
    		
 		<!-- Header-->
 		<header class="masthead d-flex align-items-center">
 		    <div class="container px-4 px-lg-5 text-center">
 		        <h1 class="mb-10">구해줘 홈즈</h1>
 		        <h3 class="mb-5"><em>help homes</em></h3>
+                <c:if test="${user_session ne null}">
+                <input class="btn btn-info"
+                       type="button"
+                       name="loadingBtn"
+                       id="loadingBtn"
+                       value="아파트 데이터 수집" onclick="javascript:location.href = '${root}/ControllerApt?action=loading'"
+                />
+                </c:if>
 		    </div>
 		</header>
         
