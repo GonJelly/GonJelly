@@ -54,7 +54,7 @@ public class MemberDao {
 			// SQL 실행 결과처리
 			if (rs.next()) {
 				System.out.println("결과처리!");
-				validate = rs.getString("member_pw");
+				validate = rs.getString("memberPw");
 			}
 					
 		} catch (SQLException e) {
@@ -259,7 +259,7 @@ public class MemberDao {
 			String mobile = rs.getString("mobile");
 			String email = rs.getString("email");
 			int age = rs.getInt("age");
-			String entryDate = rs.getString("entry_Date");
+			String entryDate = rs.getString("entryDate");
 			
 			new_dto = new Member(memberId, memberPw, name, mobile, email, age, entryDate);
 		} finally {
