@@ -9,7 +9,7 @@ import java.util.*;
 // GOAL : 복구 작업 시간이 최소인 시간
 // 제한 시간 : 20초
 // 메모리 제한 : 256MB
-public class SW_1249 {
+public class D4_1249 {
 
     // 좌,하,우,상
     private static int[][] direct = {
