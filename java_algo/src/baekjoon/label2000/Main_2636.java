@@ -1,4 +1,4 @@
-package baekjoon;
+package baekjoon.label2000;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -36,8 +36,6 @@ public class Main_2636 {
         }
 
         dfs(0,board,cheese,cheese.size());
-
-
     }
 
     private static void dfs(int cnt, int[][] board, ArrayList<Point> cheese, int cheeses) {
