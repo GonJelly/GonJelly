@@ -7,6 +7,13 @@
 /dataSources/
 /dataSources.local.xml
 
+# 환경설정 파일 및 이클립스
+.settings
+.classpath
+.project
+
 # 사용자정의 예외처리
 .idea/
 *.xml
+*.iml
+*.class
