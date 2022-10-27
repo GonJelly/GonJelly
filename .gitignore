@@ -11,7 +11,5 @@
 .idea/
 /target/
 *.iml
-.project
 .classpath
 *.class
-.settings
