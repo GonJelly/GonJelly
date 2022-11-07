@@ -304,6 +304,126 @@
     </ul>
 </footer>
 <script>
+
+    let date = new Date();
+
+    // 페이지 로드시 년도 셋팅
+    window.onload = function () {
+        
+        let yearEl = document.querySelector('#year');
+        let yearOpt = '<option value="">년도 선택</option>';
+        let year = date.getFullYear();
+
+        for( let i = year; i > year - 8; i--) {
+        	yearOpt += `<option value="\${i}">\${i}년</option>`;
+        }
+
+        yearEl.innerHTML = yearOpt;
+
+        // 시도 정보 받아오기
+        sendRequest('sido','00000000');
+    }
+
+    function sendRequest(selid, regcode) {
+        const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+        let params = "regcode_pattern=" + regcode + "&is_ignore_zero=true";
+        fetch(`\${url}?\${params}`)
+            .then((response) => response.json())
+            .then((data) => addOption(selid, data));
+    }
+
+    function addOption(selid, data) {
+    	console.log(data);
+        let opt = ``;
+        initOption(selid);
+        switch (selid) {
+            case "sido":
+                opt += `<option value="">시도 선택</option>`;
+                data.regcodes.forEach(function (regcode) {
+                    opt += `<option value="\${regcode.code}">\${regcode.name}</option>`;
+                });
+                break;
+            case "gugun":
+                opt += `<option value="">구군 선택</option>`;
+                for (let i = 0; i < data.regcodes.length; i++) {
+                    if (i != data.regcodes.length - 1) {
+                        if (
+                            data.regcodes[i].name.split(" ")[1] == data.regcodes[i + 1].name.split(" ")[1] &&
+                            data.regcodes[i].name.split(" ").length !=
+                                data.regcodes[i + 1].name.split(" ").length
+                        ) {
+                            data.regcodes.splice(i, 1);
+                            i--;
+                        }
+                    }
+                }
+                let name = "";
+                data.regcodes.forEach(function (regcode) {
+                    if (regcode.name.split(" ").length == 2) name = regcode.name.split(" ")[1];
+                    else name = regcode.name.split(" ")[1] + " " + regcode.name.split(" ")[2];
+                    opt += `
+            <option value="\${regcode.code}">\${name}</option>
+            `;
+                });
+                break;
+            case "dong":
+                opt += `<option value="">동 선택</option>`;
+                let idx = 2;
+                data.regcodes.forEach(function (regcode) {
+                    if (regcode.name.split(" ").length != 3) idx = 3;
+                    opt += `
+            <option value="\${regcode.code}">\${regcode.name.split(" ")[idx]}</option>
+            `;
+                    item.push({code: regcode.code, name: regcode.name.split(" ")[idx], type: "dong"});
+                });
+        }
+        document.querySelector(`#\${selid}`).innerHTML = opt;
+    }
+
+    function initOption(selid) {
+        let options = document.querySelector(`#\${selid}`);
+        options.length = 0;
+        // let len = options.length;
+        // for (let i = len - 1; i >= 0; i--) {
+        //   options.remove(i);
+        // }
+    }
+
+    // 클릭 이벤트 처리 ( 년도 변경 )
+    document.querySelector("#year").addEventListener("change", function () {
+        let month = date.getMonth() + 1;
+        let monthEl = document.querySelector("#month");
+        let monthOpt = `<option value="">매매월선택</option>`;
+        let yearSel = document.querySelector("#year");
+        let m = yearSel[yearSel.selectedIndex].value == date.getFullYear() ? month : 13;
+        for (let i = 1; i < m; i++) {
+            monthOpt += `<option value="\${i < 10 ? "0" + i : i}">\${i}월</option>`;
+        }
+        monthEl.innerHTML = monthOpt;
+    });
+
+    // 시도가 바뀌면 구군정보 얻기.
+    document.querySelector("#sido").addEventListener("change", function () {
+        if (this[this.selectedIndex].value) {
+            let regcode = this[this.selectedIndex].value.substr(0, 2) + "*00000";
+            sendRequest("gugun", regcode);
+        } else {
+            initOption("gugun");
+            initOption("dong");
+        }
+    });
+
+    // 구군이 바뀌면 동정보 얻기.
+    document.querySelector("#gugun").addEventListener("change", function () {
+        if (this[this.selectedIndex].value) {
+            let regcode = this[this.selectedIndex].value.substr(0, 5) + "*";
+            sendRequest("dong", regcode);
+        } else {
+            initOption("dong");
+        }
+    });
+    
+    // 아파트 지역으로 검색하는 경우
     function searchArea() {
         let main = document.querySelector('#searchArea');
         let style = main.style.display;
@@ -313,7 +433,7 @@
             document.querySelector('#searchAPT').setAttribute('style','display:none;');
         }
     }
-
+    // 아파트명으로 검색할 경우
     function searchApt() {
         let main = document.querySelector('#searchAPT');
         let style = main.style.display;
@@ -323,6 +443,7 @@
             document.querySelector('#searchArea').setAttribute('style','display:none;');
         }
     }
+
 </script>
 </body>
 </html>
