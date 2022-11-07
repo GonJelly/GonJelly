@@ -3,4 +3,26 @@
 
 <mapper namespace="com.ssafy.member.model.mapper.MemberMapper">
 
+    <resultMap id="memberDto" type="member">
+        <result column="id" property="userId" />
+        <result column="password" property="userPwd" />
+        <result column="name" property="userName" />
+        <result column="address" property="address" />
+        <result column="phone" property="phone" />
+        <result column="grade" property="grade" />
+    </resultMap>
+
+    <select id="selectMember" parameterType="member" resultMap="memberDto">
+        select id, name, password, address, phone, grade
+        from user
+        where id = #{userId} and
+              password = #{userPwd}
+    </select>
+
+    <select id="idCheck" parameterType="string" resultType="int">
+        select COUNT(id)
+        from user
+        where id = #{userId}
+    </select>
+
 </mapper>

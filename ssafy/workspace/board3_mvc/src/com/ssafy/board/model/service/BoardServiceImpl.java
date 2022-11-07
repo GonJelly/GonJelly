@@ -6,7 +6,7 @@ import java.util.Map;
 import com.ssafy.board.model.BoardDto;
 import com.ssafy.board.model.dao.BoardDao;
 import com.ssafy.board.model.dao.BoardDaoImpl;
-import com.ssafy.util.SizeConstant;
+import com.ssafy.Util.SizeConstant;
 
 public class BoardServiceImpl implements BoardService {
 	

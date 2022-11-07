@@ -1,4 +1,4 @@
-package com.ssafy.util;
+package com.ssafy.Util;
 
 import com.ssafy.main.model.CityDto;
 import org.json.JSONArray;

@@ -3,7 +3,7 @@ package com.ssafy.main;
 import com.ssafy.main.model.Member;
 import com.ssafy.main.service.MemberService;
 import com.ssafy.main.service.MemberServiceImpl;
-import com.ssafy.util.CityLoader;
+import com.ssafy.Util.CityLoader;
 
 import java.util.List;
 import java.util.Scanner;

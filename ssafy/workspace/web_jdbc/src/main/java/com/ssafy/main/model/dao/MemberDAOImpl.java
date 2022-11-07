@@ -1,7 +1,7 @@
 package com.ssafy.main.model.dao;
 
 import com.ssafy.main.model.Member;
-import com.ssafy.util.DBUtil;
+import com.ssafy.Util.DBUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

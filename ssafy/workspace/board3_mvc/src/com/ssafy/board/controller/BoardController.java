@@ -19,7 +19,7 @@ import com.ssafy.board.model.BoardDto;
 import com.ssafy.board.model.service.BoardService;
 import com.ssafy.board.model.service.BoardServiceImpl;
 import com.ssafy.member.model.MemberDto;
-import com.ssafy.util.ParameterCheck;
+import com.ssafy.Util.ParameterCheck;
 
 @WebServlet("/board")
 public class BoardController extends HttpServlet {

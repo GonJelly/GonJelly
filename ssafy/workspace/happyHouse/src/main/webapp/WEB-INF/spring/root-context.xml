@@ -15,19 +15,20 @@
 	<context:component-scan base-package="com.ssafy.Util,com.ssafy.**.model"></context:component-scan>
 	
 	<!-- database 설정하기  -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/ssafyweb?serverTimezone=UTC&amp;useUniCode=yes&amp;characterEncoding=UTF-8" />
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/happyhouse?serverTimezone=UTC&amp;useUniCode=yes&amp;characterEncoding=UTF-8" />
 		<property name="username" value="ssafy"></property>
 		<property name="password" value="ssafy"></property>
 	</bean>
 	
 	<!-- mybatis 설정하기 -->
-	<bean id="session" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="mapperLocations" value="classpath:/mappers/**/"></property>
-		<property name="typeAliasesPackage" value="com.ssafy.**.model"></property>
+		<property name="typeAliasesPackage" value="com.ssafy.*.model"></property>
+		<property name="mapperLocations" value="classpath:mappers/*/*.xml"></property>
 	</bean>
-	
-	<mybatis-spring:scan base-package="com.ssafy.**.model.mapper"/>
+
+	<!-- mapper class 설정하기 -->
+	<mybatis-spring:scan base-package="com.ssafy.*.model.mapper"/>
 </beans>

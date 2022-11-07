@@ -1,4 +1,4 @@
-package com.ssafy.util;
+package com.ssafy.Util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

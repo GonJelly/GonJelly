@@ -1,4 +1,4 @@
-package com.ssafy.util;
+package com.ssafy.Util;
 
 public class ParameterCheck {
 
