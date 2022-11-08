@@ -8,4 +8,6 @@ public interface MemberService {
     Member memberInfo(Member member) throws Exception;
     // 회원이 있는지 확인
     int idCheck(String userId) throws Exception;
+    // 회원가입
+    void addMember(Member member) throws Exception;
 }

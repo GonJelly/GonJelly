@@ -25,4 +25,9 @@
         where id = #{userId}
     </select>
 
+    <insert id="insertMember" parameterType="member">
+        insert into user (id,password,name,address,phone)
+        value (#{userId},#{userPwd},#{userName},#{address},#{phone})
+    </insert>
+
 </mapper>

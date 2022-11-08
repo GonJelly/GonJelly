@@ -51,10 +51,19 @@
                 </div>
 
                 <div class="col-12">
-                    <label for="username" class="form-label">Username</label>
+                    <label for="userPwd" class="form-label">Passowrd</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text">@</span>
-                        <input type="text" class="form-control" id="username" placeholder="Username" required>
+                        <input type="password" class="form-control" id="userPwd" placeholder="password" required>
+                        <div class="invalid-feedback">
+                            Your username is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="confirmPwd" class="form-label">Passowrd confrim</label>
+                    <div class="input-group has-validation">
+                        <input type="password" class="form-control" id="confirmPwd" placeholder="passoword confirm" required>
                         <div class="invalid-feedback">
                             Your username is required.
                         </div>
@@ -76,7 +85,7 @@
                     Valid last name is required.
                   </div>
                 </div>
-    
+                <!--
                 <div class="col-12">
                   <label for="username" class="form-label">Username</label>
                   <div class="input-group has-validation">
@@ -87,7 +96,7 @@
                     </div>
                   </div>
                 </div>
-    
+                -->
                 <div class="col-12">
                   <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
                   <input type="email" class="form-control" id="email" placeholder="you@example.com">
@@ -105,10 +114,12 @@
                 </div>
     
                 <div class="col-12">
-                  <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                  <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                  <label for="phone" class="form-label">Phone <span class="text-muted">(Optional)</span></label>
+                  <input type="text" class="form-control" id="phone" placeholder="-(하이픈) 없이 작성">
                 </div>
               </div>
+                <hr class="my-4">
+                <button class="w-100 btn btn-primary btn-lg" >회원가입</button>
         </form>
       </main>
 

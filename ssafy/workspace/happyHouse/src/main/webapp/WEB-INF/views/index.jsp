@@ -22,50 +22,7 @@
     </style>
 </head>
 <body class="text-center">
-<header class="p-3 text-bg-dark">
-    <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-            </a>
-
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="${root}/" class="nav-link px-2 text-secondary">아파트 정보 조회</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">관심지역</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">게시판</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">고객센터</a></li>
-            </ul>
-
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-            </form>
-
-            <c:choose>
-                <c:when test="${empty userInfo}">
-                    <div class="text-end">
-                        <button type="button" class="btn btn-outline-light me-2" onclick="javascript:location.href = `${root}/user/loginpage`">로그인</button>
-                        <button type="button" class="btn btn-warning">회원가입</button>
-                    </div>
-                </c:when>
-                <c:otherwise>
-                    <div class="dropdown text-end">
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="${root}/assets/img/user.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="#">마이페이지</a></li>
-                            <li><a class="dropdown-item" href="#">관심지역</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="${root}/user/logout">로그아웃</a></li>
-                        </ul>
-                    </div>
-                </c:otherwise>
-            </c:choose>
-
-        </div>
-    </div>
-</header>
-
+    <jsp:include page="include/confirm.jsp" />
 <main>
     <section class="py-5 text-center container" style="background-image: url('${root}/assets/img/intro_building.jpg')">
         <div class="row py-lg-5">
@@ -111,7 +68,7 @@
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <select class="form-select" id="month" required>
-                                        <option value="">월 선택</option>
+                                        <option value="">매매월선택</option>
                                     </select>
                                 </div>
                             </div>
@@ -289,22 +246,10 @@
     </div>
 </main>
 
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-        </a>
-        <span class="mb-3 mb-md-0 text-muted">&copy; 2022 Company, Inc</span>
-    </div>
-
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-    </ul>
-</footer>
+    <jsp:include page="./include/footer.jsp" />
 <script>
 
+    var item = [];
     let date = new Date();
 
     // 페이지 로드시 년도 셋팅
@@ -321,7 +266,7 @@
         yearEl.innerHTML = yearOpt;
 
         // 시도 정보 받아오기
-        sendRequest('sido','00000000');
+        sendRequest('sido','*00000000');
     }
 
     function sendRequest(selid, regcode) {
@@ -338,13 +283,13 @@
         initOption(selid);
         switch (selid) {
             case "sido":
-                opt += `<option value="">시도 선택</option>`;
+                // opt += `<option value="">시도 선택</option>`;
                 data.regcodes.forEach(function (regcode) {
                     opt += `<option value="\${regcode.code}">\${regcode.name}</option>`;
                 });
                 break;
             case "gugun":
-                opt += `<option value="">구군 선택</option>`;
+                // opt += `<option value="">구군 선택</option>`;
                 for (let i = 0; i < data.regcodes.length; i++) {
                     if (i != data.regcodes.length - 1) {
                         if (
@@ -367,7 +312,7 @@
                 });
                 break;
             case "dong":
-                opt += `<option value="">동 선택</option>`;
+                // opt += `<option value="">동 선택</option>`;
                 let idx = 2;
                 data.regcodes.forEach(function (regcode) {
                     if (regcode.name.split(" ").length != 3) idx = 3;
@@ -377,16 +322,27 @@
                     item.push({code: regcode.code, name: regcode.name.split(" ")[idx], type: "dong"});
                 });
         }
-        document.querySelector(`#\${selid}`).innerHTML = opt;
+        document.querySelector(`#\${selid}`).innerHTML += opt;
     }
 
     function initOption(selid) {
+        let opt = ``;
         let options = document.querySelector(`#\${selid}`);
         options.length = 0;
-        // let len = options.length;
-        // for (let i = len - 1; i >= 0; i--) {
-        //   options.remove(i);
-        // }
+        // 시도 , 구군 , 동 선택 기본
+        switch (selid) {
+            case "sido":
+                opt += `<option value="">시도 선택</option>`;
+                break;
+            case "gugun":
+                opt += `<option value="">구군 선택</option>`;
+                break;
+            case "dong":
+                opt += `<option value="">동 선택</option>`;
+                break;
+        }
+
+        options.innerHTML = opt;
     }
 
     // 클릭 이벤트 처리 ( 년도 변경 )

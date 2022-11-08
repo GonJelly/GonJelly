@@ -12,7 +12,7 @@
 	<mvc:annotation-driven />
 	
 	<!-- bean객체를 생성하기 위한 어노테이션 찾아주는 부분  -->
-	<context:component-scan base-package="com.ssafy.Util,com.ssafy.**.model"></context:component-scan>
+	<context:component-scan base-package="com.ssafy.Util,com.ssafy.*.model"></context:component-scan>
 	
 	<!-- database 설정하기  -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">

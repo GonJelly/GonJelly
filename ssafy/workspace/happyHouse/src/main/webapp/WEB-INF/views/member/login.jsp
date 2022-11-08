@@ -15,8 +15,8 @@
     <link href="${root}/assets/css/common.css" rel="stylesheet">
     <c:if test="${cookie.saveId.value ne null}">
         <script>
-            document.querySelector('#userId').value = `${cookie.saveId.value}`;
-            document.querySelector('#ckId').setAttribute('checked','checked');
+            <c:set var="ckid" value="checked" />
+            <c:set var="saveId" value='${cookie.saveId.value}' />
         </script>
     </c:if>
 </head>
@@ -25,7 +25,7 @@
     <form id="loginfrm" method="POST" action="">
         <h1 class="h3 mb-3 fw-normal">로그인</h1>
         <div class="form-floating">
-            <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디">
+            <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" value="${saveId}">
             <label for="userId">ID</label>
         </div>
         <div class="form-floating">
@@ -37,7 +37,7 @@
         </div>
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" value="remember-me" id="ckId" name="ckId"> Remember me
+                <input type="checkbox" value="remember-me" id="ckId" name="ckId" ${ckid} > Remember me
             </label>
         </div>
         <button type="button" class="w-100 btn btn-lg btn-primary" onclick="login()">Sign in</button>
@@ -58,21 +58,7 @@
     </form>
 </main>
 
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-        </a>
-        <span class="mb-3 mb-md-0 text-muted">&copy; 2022 Company, Inc</span>
-    </div>
-
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-    </ul>
-</footer>
-
+    <jsp:include page="../include/footer.jsp" />
 <script>
 
     let isUserid = false
@@ -100,6 +86,7 @@
             .then( response => response.json() )
             .then(data => {
                 console.log(data);
+                // 아이디가 존재하는 경우 true 없으면 false
                 if( data != 0 ) {
                     isUserid = true;
                 } else {

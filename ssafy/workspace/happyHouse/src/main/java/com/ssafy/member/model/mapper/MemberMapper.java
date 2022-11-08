@@ -18,7 +18,7 @@ public interface MemberMapper {
 	// id가 중복되어 있는지 검사
 	int idCheck(String id) throws SQLException;
 	// 회원정보 등록
-//	void insertMember(Member member) throws SQLException;
+	void insertMember(Member member) throws SQLException;
 	// 회원정보 삭제
 //	void deleteMember(Member member) throws SQLException;
 	

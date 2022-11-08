@@ -22,6 +22,11 @@ public class MemberController {
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
     @Autowired
     private MemberService memberService;
+    // 회원가입 페이지 이동
+    @RequestMapping(value = "/registpage", method = RequestMethod.GET)
+    public String registpage() {
+        return "member/regist";
+    }
     //로그인페이지 이동
     @RequestMapping(value = "/loginpage", method = RequestMethod.GET)
     public String loginpage() {
@@ -87,6 +92,22 @@ public class MemberController {
         }
         session.invalidate();
         return "index";
+    }
+
+    // 회원가입하기
+    @RequestMapping(value ="/regist", method = RequestMethod.POST)
+    public String regist(Member member, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+
+        logger.debug("MemberController regist() user : {}",member);
+
+        try {
+            member.setUserName(firstName + lastName);
+            memberService.addMember(member);
+            return "redirect:/user/loginpage";
+        } catch( Exception e ) {
+            e.printStackTrace();
+            return "error/error";
+        }
     }
 
 }
