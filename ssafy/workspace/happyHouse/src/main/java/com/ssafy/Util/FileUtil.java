@@ -1,6 +1,3 @@
 package com.ssafy.Util;
 
-public class FileUtil {
-	
-	
-}
+public class FileUtil {}

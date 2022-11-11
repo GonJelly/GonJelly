@@ -1,148 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>마이페이지</title>
     <!-- 부트스트랩 가져오기 -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link href="../assets/css/common.css" rel="stylesheet">
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link href="../assets/css/common.css" rel="stylesheet" />
 
     <style>
-        @media (max-width: 768px) {
-            .profile {
-                display: none;
-            }
+      @media (max-width: 768px) {
+        .profile {
+          display: none;
         }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header class="p-3 text-bg-dark">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-                </a>
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+              <use xlink:href="#bootstrap" />
+            </svg>
+          </a>
 
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-white">아파트 정보 조회</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">관심지역</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary">마이페이지</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">게시판</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">고객센터</a></li>
-                </ul>
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 text-white">아파트 정보 조회</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">관심지역</a></li>
+            <li><a href="#" class="nav-link px-2 text-secondary">마이페이지</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">게시판</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">고객센터</a></li>
+          </ul>
 
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-                </form>
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <input
+              type="search"
+              class="form-control form-control-dark text-bg-dark"
+              placeholder="Search..."
+              aria-label="Search"
+            />
+          </form>
 
-                <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2">로그인</button>
-                    <button type="button" class="btn btn-warning">회원가입</button>
-                </div>
-            </div>
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2">로그인</button>
+            <button type="button" class="btn btn-warning">회원가입</button>
+          </div>
         </div>
+      </div>
     </header>
     <main class="w-100 m-auto" style="max-width: 800px">
-        <div class="row justify-content-center g-3 align-items-">
-            <div class="col-md-5 col-8 order-md-first py-5">
-                <div class="row justify-content-end profile">
-                    <div class="col-md-12 py-2">
-                        <div class="card p-2 float-end" style="max-width: 200px">
-                            <img src="../assets/img/user.png"/>
-                            <h4 class="align-items-center mb-3">
-                                <div class="text-primary text-center">프로필</div>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <ul class="list-group mb-3">
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">관심지역</h6>
-                                    <small class="text-muted">서울시 종로</small>
-                                </div>
-                                <span class="text-muted">등록일자</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">관심지역</h6>
-                                    <small class="text-muted">서울시 종로</small>
-                                </div>
-                                <span class="text-muted">등록일자</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">관심지역</h6>
-                                    <small class="text-muted">서울시 종로</small>
-                                </div>
-                                <span class="text-muted">등록일자</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between bg-light">
-                                <div>
-                                    <h6 class="my-0">관심지역</h6>
-                                    <small class="text-muted">서울시 종로</small>
-                                </div>
-                                <span class="text-muted">등록일자</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span>총 등록</span>
-                                <strong>0건</strong>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+      <div class="row justify-content-center g-3 align-items-">
+        <div class="col-md-5 col-8 order-md-first py-5">
+          <div class="row justify-content-end profile">
+            <div class="col-md-12 py-2">
+              <div class="card p-2 float-end" style="max-width: 200px">
+                <img src="../assets/img/user.png" />
+                <h4 class="align-items-center mb-3">
+                  <div class="text-primary text-center">프로필</div>
+                </h4>
+              </div>
             </div>
-            <div class="col-md-7 col-8 py-3">
-                <h4 class="mb-3 text-center">내 정보</h4>
-                <form>
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <label for="userId" class="form-label">ID</label>
-                            <div class="input-group has-validation">
-                                <input type="text" class="form-control" id="userId" placeholder="ID" disabled>
-                                <div class="invalid-feedback">
-                                    Your username is required.
-                                </div>
-                            </div>
-                        </div>
+            <div class="col-md-8">
+              <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                  <div>
+                    <h6 class="my-0">관심지역</h6>
+                    <small class="text-muted">서울시 종로</small>
+                  </div>
+                  <span class="text-muted">등록일자</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                  <div>
+                    <h6 class="my-0">관심지역</h6>
+                    <small class="text-muted">서울시 종로</small>
+                  </div>
+                  <span class="text-muted">등록일자</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                  <div>
+                    <h6 class="my-0">관심지역</h6>
+                    <small class="text-muted">서울시 종로</small>
+                  </div>
+                  <span class="text-muted">등록일자</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div>
+                    <h6 class="my-0">관심지역</h6>
+                    <small class="text-muted">서울시 종로</small>
+                  </div>
+                  <span class="text-muted">등록일자</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>총 등록</span>
+                  <strong>0건</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7 col-8 py-3">
+          <h4 class="mb-3 text-center">내 정보</h4>
+          <form>
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="userId" class="form-label">ID</label>
+                <div class="input-group has-validation">
+                  <input type="text" class="form-control" id="userId" placeholder="ID" disabled />
+                  <div class="invalid-feedback">Your username is required.</div>
+                </div>
+              </div>
 
-                        <div class="col-12">
-                            <label for="userPwd" class="form-label">Passowrd</label>
-                            <div class="input-group has-validation">
-                                <input type="password" class="form-control" id="userPwd" placeholder="password" disabled>
-                                <span class="input-group-text">수정</span>
-                                <div class="invalid-feedback">
-                                    Your username is required.
-                                </div>
-                            </div>
-                        </div>
+              <div class="col-12">
+                <label for="userPwd" class="form-label">Passowrd</label>
+                <div class="input-group has-validation">
+                  <input type="password" class="form-control" id="userPwd" placeholder="password" disabled />
+                  <span class="input-group-text">수정</span>
+                  <div class="invalid-feedback">Your username is required.</div>
+                </div>
+              </div>
 
-                        <div class="col-sm-6">
-                            <label for="firstName" class="form-label">First name</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="firstName" placeholder="" disabled>
-                                <span class="input-group-text">수정</span>
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
-                            </div>
-                        </div>
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label">First name</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="firstName" placeholder="" disabled />
+                  <span class="input-group-text">수정</span>
+                  <div class="invalid-feedback">Valid first name is required.</div>
+                </div>
+              </div>
 
-                        <div class="col-sm-6">
-                            <label for="lastName" class="form-label">Last name</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="lastName" placeholder="" disabled>
-                                <span class="input-group-text">수정</span>
-                                <div class="invalid-feedback">
-                                    Valid last name is required.
-                                </div>
-                            </div>
-                        </div>
-                        <!--
+              <div class="col-sm-6">
+                <label for="lastName" class="form-label">Last name</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="lastName" placeholder="" disabled />
+                  <span class="input-group-text">수정</span>
+                  <div class="invalid-feedback">Valid last name is required.</div>
+                </div>
+              </div>
+              <!--
                         <div class="col-12">
                           <label for="username" class="form-label">Username</label>
                           <div class="input-group has-validation">
@@ -154,39 +162,35 @@
                           </div>
                         </div>
                         -->
-                        <div class="col-12">
-                            <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                            <div class="input-group">
-                                <input type="email" class="form-control" id="email" placeholder="you@example.com" disabled>
-                                <span class="input-group-text">수정</span>
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address for shipping updates.
-                                </div>
-                            </div>
-                        </div>
+              <div class="col-12">
+                <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+                <div class="input-group">
+                  <input type="email" class="form-control" id="email" placeholder="you@example.com" disabled />
+                  <span class="input-group-text">수정</span>
+                  <div class="invalid-feedback">Please enter a valid email address for shipping updates.</div>
+                </div>
+              </div>
 
-                        <div class="col-12">
-                            <label for="address" class="form-label">Address</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="address" placeholder="1234 Main St" disabled>
-                                <span class="input-group-text">수정</span>
-                                <div class="invalid-feedback">
-                                    Please enter your shipping address.
-                                </div>
-                            </div>
-                        </div>
+              <div class="col-12">
+                <label for="address" class="form-label">Address</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="address" placeholder="1234 Main St" disabled />
+                  <span class="input-group-text">수정</span>
+                  <div class="invalid-feedback">Please enter your shipping address.</div>
+                </div>
+              </div>
 
-                        <div class="col-12">
-                            <label for="phone" class="form-label">Phone <span class="text-muted">(Optional)</span></label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="phone" placeholder="-(하이픈) 없이 작성" disabled>
-                                <span class="input-group-text">수정</span>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+              <div class="col-12">
+                <label for="phone" class="form-label">Phone <span class="text-muted">(Optional)</span></label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="phone" placeholder="-(하이픈) 없이 작성" disabled />
+                  <span class="input-group-text">수정</span>
+                </div>
+              </div>
             </div>
+          </form>
         </div>
+      </div>
     </main>
-</body>
+  </body>
 </html>
