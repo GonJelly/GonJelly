@@ -30,4 +30,17 @@
         value (#{userId},#{userPwd},#{userName},#{address},#{phone})
     </insert>
 
+    <select id="searchPwd" parameterType="member" resultType="string" >
+        select password
+        from user
+        where name = #{userName} and
+              id = #{userId}
+    </select>
+
+    <update id="updatePass" parameterType="map">
+        update user
+        set password = #{newPass}
+        where id = #{userId} and name = #{userName}
+    </update>
+
 </mapper>

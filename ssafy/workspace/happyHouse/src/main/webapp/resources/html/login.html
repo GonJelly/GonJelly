@@ -29,20 +29,19 @@
               <input type="checkbox" value="remember-me"> Remember me
             </label>
           </div>
-          <button class="w-100 btn btn-lg btn-primary" id="Btn-login" onclick="login()">Sign in</button>
+          <button class="w-100 btn btn-lg btn-primary" id="Btn-login" onclick="login()">로그인</button>
           <hr class="my-4">
-          <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
-          <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-3" type="submit">
-            <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"/></svg>
-            Sign up with Twitter
-          </button>
-          <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit">
-            <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"/></svg>
-            Sign up with Facebook
-          </button>
           <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
-            <svg class="bi me-1" width="16" height="16"><use xlink:href="#github"/></svg>
-            Sign up with GitHub
+              <svg class="bi me-1" width="16" height="16"><use xlink:href="#github"/></svg>
+              아이디 찾기
+          </button>ㄴ
+          <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"/></svg>
+            비밀번호 찾기
+          </button>
+          <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-3" type="submit">
+              <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"/></svg>
+              회원가입
           </button>
       </main>
 
@@ -61,5 +60,65 @@
         </ul>
       </footer>
 
+      <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+      >
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호찾기</h1>
+                      <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                      ></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="form-floating">
+                          <input
+                                  type="text"
+                                  class="form-control"
+                                  id="findName"
+                                  name="findName"
+                                  placeholder="name"
+                          />
+                          <label for="userId">name</label>
+                      </div>
+                      <div class="form-floating">
+                          <input type="text" class="form-control" id="findId" name="findId" placeholder="ID" />
+                          <label for="userId">ID</label>
+                      </div>
+                      <div class="form-floating text-start">
+                          <span class="fs-6" style="color: red">정보가 일치하지 않습니다.</span>
+                      </div>
+                      <div class="form-floating text-start d-flex justify-content-between">
+          <span class="fw-3"
+          >당신의 ID : [<span class="text-primary">-------</span>] 입니다.</span
+          >
+                          <button
+                                  type="button"
+                                  class="btn btn-success"
+                                  style="
+              --bs-btn-padding-y: 0.25rem;
+              --bs-btn-padding-x: 0.5rem;
+              --bs-btn-font-size: 0.75rem;
+            "
+                          >
+                              초기화
+                          </button>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">찾기</button>
+                  </div>
+              </div>
+          </div>
+      </div>
 </body>
 </html>

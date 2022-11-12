@@ -2,6 +2,7 @@ package com.ssafy.member.model.mapper;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.ssafy.member.model.Member;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,5 +22,9 @@ public interface MemberMapper {
 	void insertMember(Member member) throws SQLException;
 	// 회원정보 삭제
 //	void deleteMember(Member member) throws SQLException;
+	// 비밀번호 찾기
+	String searchPwd(Member member) throws SQLException;
+	// 패스워드 변경
+	void updatePass(Map<String,Object> map) throws SQLException;
 	
 }

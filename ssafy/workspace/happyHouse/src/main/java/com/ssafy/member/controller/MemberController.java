@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.URLEncoder;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/user")
@@ -31,6 +36,11 @@ public class MemberController {
     @RequestMapping(value = "/loginpage", method = RequestMethod.GET)
     public String loginpage() {
         return "member/login";
+    }
+
+    @RequestMapping(value = "/mypage", method = RequestMethod.GET)
+    public String mypage() {
+        return "member/mypage";
     }
     // 로그인하기
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -108,6 +118,51 @@ public class MemberController {
             e.printStackTrace();
             return "error/error";
         }
+    }
+
+    @RequestMapping(value = "/searchPwd", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> searchPwd(@RequestBody Member member) {
+        logger.debug("MemberController searchPwd() Params {}", member);
+        Map<String,Object> result = new HashMap<>();
+        try {
+            String password = memberService.searchPwd(member);
+            if( password != null && !password.equals("")) {
+                Map<String,Object> updateMap = new HashMap<>();
+                // 새로운 비밀번호 12자리 생성
+                String newPass = randomPwd();
+                // 새로운 비밀번호로 변경
+                updateMap.put("userId",member.getUserId());
+                updateMap.put("userName",member.getUserName());
+                updateMap.put("newPass",newPass);
+
+                memberService.updatePass(updateMap);
+
+                result.put("newPass",newPass);
+                return new ResponseEntity<Map<String,Object>>(result,HttpStatus.OK);
+            } else {
+                result.put("message","정보가 정확하지 않습니다.");
+                return new ResponseEntity<Map<String,Object>>(result,HttpStatus.NO_CONTENT);
+            }
+        } catch( Exception e ) {
+            e.printStackTrace();
+            return new ResponseEntity<Map<String,Object>>(result,HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    private String randomPwd() {
+
+        int leftLimit = 48;
+        int rightLimit = 122;
+        int totalLimit = 12;
+        Random random = new Random();
+        String generator = random.ints(leftLimit, rightLimit - 1)
+                                 .filter(num -> (num <= 57 || num >= 65) && ( num <= 90 || num >= 97))
+                                 .limit(totalLimit)
+                                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                                 .toString();
+
+        return generator;
     }
 
 }

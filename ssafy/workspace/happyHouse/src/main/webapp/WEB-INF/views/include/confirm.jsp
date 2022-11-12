@@ -32,7 +32,7 @@
                             <img src="${root}/assets/img/user.png" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="#">마이페이지</a></li>
+                            <li><a class="dropdown-item" href="${root}/user/mypage">마이페이지</a></li>
                             <li><a class="dropdown-item" href="#">관심지역</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="${root}/user/logout">로그아웃</a></li>

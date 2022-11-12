@@ -31,4 +31,7 @@
 
 	<!-- mapper class 설정하기 -->
 	<mybatis-spring:scan base-package="com.ssafy.*.model.mapper"/>
+
+	<!-- 파일업로드 관련 설정 -->
+
 </beans>
