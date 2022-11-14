@@ -143,6 +143,7 @@
                 return;
             }
 
+            //
             form.setAttribute('action',`${root}/user/regist`);
             form.submit();
         };

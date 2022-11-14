@@ -1,20 +1,18 @@
 package com.ssafy.member.controller;
 
+import com.ssafy.Util.PrivateUtil;
 import com.ssafy.member.model.Member;
 import com.ssafy.member.model.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +23,9 @@ import java.util.Random;
 public class MemberController {
 
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+    private static final String SUCCESS = "SUCCESS";
+    private static final String FAILED = "FAILED";
+
     @Autowired
     private MemberService memberService;
     // 회원가입 페이지 이동
@@ -52,7 +53,11 @@ public class MemberController {
         try {
             // 로그인 정보조회
             Member user = memberService.memberInfo(member);
+
             if( user != null ) {
+                String[] names = user.getUserName().split(" ");
+                user.setFirstName(names[0]);
+                user.setLastName(names[names.length - 1]);
                 // 세션정보 저장
                 session.setAttribute("userInfo",user);
                 // 쿠키 생성하기
@@ -86,7 +91,7 @@ public class MemberController {
             return new ResponseEntity<Integer> (cnt,HttpStatus.OK);
         } catch( Exception e ) {
             e.printStackTrace();
-            return new ResponseEntity<String> ("오루발생[idCheck] " + e.getMessage(), HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<String> ("오류발생[idCheck] " + e.getMessage(), HttpStatus.EXPECTATION_FAILED);
         }
     }
 
@@ -106,12 +111,13 @@ public class MemberController {
 
     // 회원가입하기
     @RequestMapping(value ="/regist", method = RequestMethod.POST)
-    public String regist(Member member, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    public String regist(Member member) {
 
         logger.debug("MemberController regist() user : {}",member);
 
         try {
-            member.setUserName(firstName + lastName);
+            member.setUserName(member.getFirstName() +" "+ member.getLastName());
+            member.setPhone(PrivateUtil.phoneNumber(member.getPhone()));
             memberService.addMember(member);
             return "redirect:/user/loginpage";
         } catch( Exception e ) {
@@ -130,7 +136,7 @@ public class MemberController {
             if( password != null && !password.equals("")) {
                 Map<String,Object> updateMap = new HashMap<>();
                 // 새로운 비밀번호 12자리 생성
-                String newPass = randomPwd();
+                String newPass = PrivateUtil.randomPwd();
                 // 새로운 비밀번호로 변경
                 updateMap.put("userId",member.getUserId());
                 updateMap.put("userName",member.getUserName());
@@ -150,19 +156,47 @@ public class MemberController {
         }
     }
 
-    private String randomPwd() {
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> memberModify(@RequestBody Member member,HttpSession session) {
 
-        int leftLimit = 48;
-        int rightLimit = 122;
-        int totalLimit = 12;
-        Random random = new Random();
-        String generator = random.ints(leftLimit, rightLimit - 1)
-                                 .filter(num -> (num <= 57 || num >= 65) && ( num <= 90 || num >= 97))
-                                 .limit(totalLimit)
-                                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                                 .toString();
-
-        return generator;
+        logger.debug("MemberController memberModify() param : {}",member);
+        Map<String,Object> result = new HashMap<>();
+        try {
+            member.setUserName(member.getFirstName() + " " + member.getLastName());
+            int cnt = memberService.updateMember(member);
+            if( cnt != 0) {
+                session.setAttribute("userInfo",member);
+                result.put("result","SUCCESS");
+                return new ResponseEntity<Map<String,Object>>(result,HttpStatus.OK);
+            } else {
+                result.put("result","FAILEd");
+                return new ResponseEntity<Map<String,Object>>(result,HttpStatus.OK);
+            }
+        } catch( Exception e ) {
+            e.printStackTrace();
+            result.put("msg","서비스 처리 중 오류 발생");
+            return new ResponseEntity<Map<String,Object>>(result,HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
+    @RequestMapping(value="/{userId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<?> memberDelete(@PathVariable String userId) {
+        logger.debug("MemberController memberDelete userId : {}",userId);
+        Map<String,Object> result = new HashMap<>();
+        try{
+            int cnt = memberService.deleteMember(userId);
+            if( cnt > 0) {
+                result.put("msg","SUCCESS");
+            } else {
+                result.put("msg","FAILED");
+            }
+            return new ResponseEntity<Map<String,Object>>(result, HttpStatus.OK);
+        } catch( Exception e ) {
+            e.printStackTrace();
+            result.put("msg","서비스 처리중 오류가 발생하였습니다.");
+            return new ResponseEntity<Map<String,Object>>(result, HttpStatus.EXPECTATION_FAILED);
+        }
+    }
 }

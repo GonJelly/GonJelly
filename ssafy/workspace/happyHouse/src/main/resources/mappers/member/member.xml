@@ -43,4 +43,27 @@
         where id = #{userId} and name = #{userName}
     </update>
 
+    <update id="updateMember" parameterType="member">
+        update user
+        <set>
+            <if test="userName != '' or userName != null">
+                name = #{userName},
+            </if>
+            <if test="userPwd != '' or userPwd != null">
+                password = #{userPwd},
+            </if>
+            <if test="address != '' or address != null">
+                address = #{address},
+            </if>
+            <if test="phone != '' or phone != null">
+                phone = #{phone},
+            </if>
+        </set>
+        where id = #{userId};
+    </update>
+
+    <delete id="deleteMember" parameterType="string">
+        delete from user
+        where id = #{userId}
+    </delete>
 </mapper>

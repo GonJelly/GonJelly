@@ -97,6 +97,7 @@
             let userId = document.getElementById('findId').value;
             let userName = document.getElementById('findName').value;
 
+
             fetch(`${root}/user/searchPwd`,{
                 method:'post',
                 headers: {
@@ -123,7 +124,7 @@
 
         document.getElementById('findPwdModal').addEventListener('show.bs.modal', event => {
             let showbody = document.querySelector('.modal-body');
-            console.log('open');
+
             showbody.innerHTML =
                 '<div class="form-floating">' +
                 '<input type="text" class="form-control" id="findName" name="findName" placeholder="name" required />' +
@@ -145,8 +146,7 @@
 
         if( userId == '' || userId == null ||
                 userPwd == '' || userPwd == null || isUserid ) {
-            document.querySelector('#failed').setAttribute('style',';');
-
+            document.querySelector('#failed').setAttribute('style','');
         } else {
             let form = document.getElementById('loginfrm');
             form.setAttribute('action', "/user/login");

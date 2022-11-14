@@ -27,6 +27,11 @@ public class MemberServiceImpl implements MemberService{
         memberMapper.insertMember(member);
     }
 
+    @Override
+    public int updateMember(Member member) throws Exception {
+        return memberMapper.updateMember(member);
+    }
+
     public String searchPwd(Member member) throws Exception {
         return memberMapper.searchPwd(member);
     }
@@ -34,5 +39,10 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public void updatePass(Map<String,Object> map) throws Exception {
         memberMapper.updatePass(map);
+    }
+
+    @Override
+    public int deleteMember(String userId) throws Exception {
+        return memberMapper.deleteMember(userId);
     }
 }

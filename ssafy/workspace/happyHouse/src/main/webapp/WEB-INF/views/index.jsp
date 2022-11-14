@@ -30,8 +30,8 @@
                 <h1 class="fw-light">구해줘 홈즈!!</h1>
                 <p class="lead text-dark">검색하고 싶은 지역을 선택해 주세요.!!</p>
                 <p>
-                    <input type="button" class="btn btn-primary my-2" onclick="searchApt()" value="아파트명 검색하기" />
-                    <input type="button" class="btn btn-secondary my-2" onclick="searchArea()" value="지역주소로 검색하기" />
+                    <input type="button" class="btn btn-primary my-2" onclick="searchOpenApt()" value="아파트명 검색하기" />
+                    <input type="button" class="btn btn-secondary my-2" onclick="searchOpenArea()" value="지역주소로 검색하기" />
                 </p>
             </div>
         </div>
@@ -85,8 +85,8 @@
         <div id="searchAPT" class="row justify-content-center py-lg-3">
             <div class="col-lg-6">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="아파트 검색">
-                    <button type="submit" class="btn btn-secondary">search</button>
+                    <input type="text" class="form-control" id="aptName" placeholder="아파트 검색">
+                    <button type="submit" class="btn btn-secondary" id="searchAptBtn">search</button>
                 </div>
             </div>
         </div>
@@ -94,7 +94,7 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="BuildInfo">
                 <div class="col">
                     <div class="card shadow-sm">
                         <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -104,9 +104,12 @@
                         </svg>
                         <div class="card-body">
                             <div class="card-text">
-                                <div class="row justify-content-md-between">
-                                    <div class="col-md-6 col-12 fs-5">[아파트명]</div>
-                                    <div class="col-md-6 col-12 fw-5">가격: --- 만원</div>
+                                <div class="row row-cols-2 justify-content-md-between">
+                                    <div class="col-auto fs-5">[아파트 이름]</div>
+                                    <div class="col-2 fw-5">ㅇㅇ층</div>
+                                </div>
+                                <div class="row row-cols-1 justify-content-md-end">
+                                    <div class="col-auto fw-5">가격: ㅇㅇㅇ,ㅇㅇㅇ 만원</div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
@@ -116,7 +119,7 @@
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                     </c:if>
                                 </div>
-                                <small class="text-muted">거래일자 : 2000-03-12</small>
+                                <small class="text-muted">거래일자 : ㅇㅇㅇㅇ-ㅇㅇ-ㅇㅇ</small>
                             </div>
                         </div>
                     </div>
@@ -264,7 +267,6 @@
 
     // 페이지 로드시 년도 셋팅
     window.onload = function () {
-        
         let yearEl = document.querySelector('#year');
         let yearOpt = '<option value="">년도 선택</option>';
         let year = date.getFullYear();
@@ -277,6 +279,8 @@
 
         // 시도 정보 받아오기
         sendRequest('sido','*00000000');
+        // 아파트 조회
+        searchApt('all');
     }
 
     function sendRequest(selid, regcode) {
@@ -355,6 +359,46 @@
         options.innerHTML = opt;
     }
 
+    function makeAptCard(data) {
+        let buildInfo = document.getElementById('BuildInfo');
+        let list = ''
+        if( data.length == 0 ) { alert('찾는 데이터가 없습니다.') };
+        data.forEach( apt => {
+            list += `
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                    <title>Placeholder</title>
+                                    <rect width="100%" height="100%" fill="#55595c"/>
+                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                                </svg>
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        <div class="row row-cols-2 justify-content-md-between">
+                                            <div class="col-auto fs-5">\${apt.apartmentName}</div>
+                                            <div class="col-2 fw-5">\${apt.floor}층</div>
+                                        </div>
+                                        <div class="row row-cols-1 justify-content-md-end">
+                                            <div class="col-auto fw-5">가격: \${apt.dealAmount} 만원</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" data-dealNo="\${apt.dealNo}" onclick="dealDetail(this)">상세보기</button>
+                                            <c:if test="${not empty userInfo}" >
+                                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </c:if>
+                                        </div>
+                                        <small class="text-muted">거래일자 : \${apt.dealYear}-\${apt.dealMonth}-\${apt.dealDay}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                `
+        });
+        buildInfo.innerHTML = list;
+    }
+
     // 클릭 이벤트 처리 ( 년도 변경 )
     document.querySelector("#year").addEventListener("change", function () {
         let month = date.getMonth() + 1;
@@ -388,9 +432,14 @@
             initOption("dong");
         }
     });
+
+    document.querySelector('#searchAptBtn').addEventListener('click', function() {
+        let word = document.getElementById('aptName').value;
+        searchApt('apartName',word);
+    })
     
     // 아파트 지역으로 검색하는 경우
-    function searchArea() {
+    function searchOpenArea() {
         let main = document.querySelector('#searchArea');
         let style = main.style.display;
 
@@ -400,7 +449,7 @@
         }
     }
     // 아파트명으로 검색할 경우
-    function searchApt() {
+    function searchOpenApt() {
         let main = document.querySelector('#searchAPT');
         let style = main.style.display;
 
@@ -410,6 +459,20 @@
         }
     }
 
+    // 상세보기 버튼 클릭했을 때
+    function dealDetail(obj) {
+        let dealNo = obj.getAttribute('data-dealNo');
+        console.log(dealNo);
+        location.href = `${root}/build/detail/\${dealNo}`;
+    }
+
+    function searchApt(key, word) {
+        let params = `key=\${key}&word=\${word == undefined ? '' : word}&pgno=1`;
+        let url = `${root}/build/search`;
+        fetch(`\${url}?\${params}`)
+            .then( response => response.json() )
+            .then( data => makeAptCard(data) );
+    }
 </script>
 </body>
 </html>

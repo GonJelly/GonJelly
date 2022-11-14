@@ -12,8 +12,12 @@ public interface MemberService {
     int idCheck(String userId) throws Exception;
     // 회원가입
     void addMember(Member member) throws Exception;
+    // 회원정보 변경
+    int updateMember(Member member) throws Exception;
     // 비밀번호 찾기
     String searchPwd(Member member) throws Exception;
     // 비밀번호 변경
-    void updatePass(Map<String,Object> newPass)throws Exception;
+    void updatePass(Map<String,Object> newPass) throws Exception;
+    // 회원정보 삭제하기
+    int deleteMember(String userId) throws Exception;
 }

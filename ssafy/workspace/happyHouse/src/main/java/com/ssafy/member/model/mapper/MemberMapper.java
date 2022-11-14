@@ -26,5 +26,8 @@ public interface MemberMapper {
 	String searchPwd(Member member) throws SQLException;
 	// 패스워드 변경
 	void updatePass(Map<String,Object> map) throws SQLException;
-	
+	// 회원정보 수정하기
+	int updateMember(Member member) throws SQLException;
+	// 회원정보 삭제하기
+	int deleteMember(String userId) throws SQLException;
 }

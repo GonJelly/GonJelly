@@ -9,8 +9,7 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="${root}/" class="nav-link px-2 text-secondary">아파트 정보 조회</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">관심지역</a></li>
+                <li><a href="${root}/" class="nav-link px-2 text-white">아파트 정보 조회</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">게시판</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">고객센터</a></li>
             </ul>

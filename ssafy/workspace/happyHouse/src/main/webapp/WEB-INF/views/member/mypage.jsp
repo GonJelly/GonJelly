@@ -27,8 +27,8 @@
     <main class="w-100 m-auto" style="max-width: 800px">
         <div class="row justify-content-center g-3 align-items-">
             <div class="col-md-5 col-8 order-md-first py-5">
-                <div class="row justify-content-end profile">
-                    <div class="col-md-12 py-2">
+                <div class="row justify-content-end">
+                    <div class="col-md-12 py-2 profile">
                         <div class="card p-2 float-end" style="max-width: 200px">
                             <img src="../assets/img/user.png"/>
                             <h4 class="align-items-center mb-3">
@@ -76,12 +76,12 @@
             </div>
             <div class="col-md-7 col-8 py-3">
                 <h4 class="mb-3 text-center">내 정보</h4>
-                <form>
+                <form id="mypageform" method="post" action="">
                     <div class="row g-3">
                         <div class="col-12">
                             <label for="userId" class="form-label">ID</label>
                             <div class="input-group has-validation">
-                                <input type="text" class="form-control" id="userId" name="userId" placeholder="ID" value="${userInfo.userId}" disabled>
+                                <input type="text" class="form-control" id="userId" name="userId" placeholder="ID" value="${userInfo.userId}" disabled="true">
                                 <div class="invalid-feedback">
                                     Your username is required.
                                 </div>
@@ -92,7 +92,7 @@
                             <label for="userPwd" class="form-label">Passowrd</label>
                             <div class="input-group has-validation">
                                 <input type="password" class="form-control" id="userPwd" name="userPwd" value="${userInfo.userPwd}" disabled="true">
-                                <input type="button" class="input-group-text" value="수정" onclick="BtnModify(this)" />
+                                <input type="button" class="input-group-text" value="수정" onclick="modify_Toggle(this)" />
                                 <div class="invalid-feedback">
                                     Your username is required.
                                 </div>
@@ -102,8 +102,8 @@
                         <div class="col-sm-6">
                             <label for="firstName" class="form-label">First name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="firstName" name="firstName" value="${userInfo.userName}" disabled="true">
-                                <input type="button" class="input-group-text" value="수정" onclick="BtnModify(this)" />
+                                <input type="text" class="form-control" id="firstName" name="firstName" value="${userInfo.firstName}" disabled="true">
+                                <input type="button" class="input-group-text" value="수정" onclick="modify_Toggle(this)" />
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
@@ -113,8 +113,8 @@
                         <div class="col-sm-6">
                             <label for="lastName" class="form-label">Last name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="lastName" name="lastName" value="${userInfo.userName}" disabled="true">
-                                <input type="button" class="input-group-text" value="수정" onclick="BtnModify(this)" />
+                                <input type="text" class="form-control" id="lastName" name="lastName" value="${userInfo.lastName}" disabled="true">
+                                <input type="button" class="input-group-text" value="수정" onclick="modify_Toggle(this)" />
                                 <div class="invalid-feedback">
                                     Valid last name is required.
                                 </div>
@@ -135,8 +135,8 @@
                         <div class="col-12">
                             <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
                             <div class="input-group">
-                                <input type="email" class="form-control" id="email" name="email" value="" disabled="true">
-                                <input type="button" class="input-group-text" value="수정" onclick="BtnModify(this)" />
+                                <input type="email" class="form-control" id="email" name="email" value="${userInfo.emailId}@${userInfo.emailDomain}" disabled="true">
+                                <input type="button" class="input-group-text" value="수정" onclick="modify_Toggle(this)" />
                                 <div class="invalid-feedback">
                                     Please enter a valid email address for shipping updates.
                                 </div>
@@ -147,7 +147,7 @@
                             <label for="address" class="form-label">Address</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="address" name="address" value="${userInfo.address}" disabled="true">
-                                <input type="button" class="input-group-text" value="수정" onclick="BtnModify(this)" />
+                                <input type="button" class="input-group-text" value="수정" onclick="modify_Toggle(this)" />
                                 <div class="invalid-feedback">
                                     Please enter your shipping address.
                                 </div>
@@ -158,11 +158,14 @@
                             <label for="phone" class="form-label">Phone <span class="text-muted">(Optional)</span></label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="phone" name="phone" value="${userInfo.phone}" disabled="true">
-                                <input type="button" class="input-group-text" value="수정" onclick="BtnModify(this)" />
+                                <input type="button" class="input-group-text" value="수정" onclick="modify_Toggle(this)" />
                             </div>
                         </div>
+                        <div class="col-12 text-end">
+                            <button type="button" class="btn btn-primary" id="modifyMember" >수정</button>
+                            <button type="button" class="btn btn-danger" id="deleteMember">회원탈퇴</button>
+                        </div>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -171,7 +174,7 @@
 
  <script>
 
-     function BtnModify(obj) {
+     function modify_Toggle(obj) {
          // 이전 엘레멘트인 input 요소를 찾기
          let inputEl = obj.previousElementSibling;
          // Input 속성에 disabled 속성이 참이면 없애고
@@ -184,6 +187,71 @@
          }
      }
 
+     document.getElementById('modifyMember').addEventListener('click', event => {
+         // input 상태확인
+         let inputEl = document.getElementById('mypageform').getElementsByClassName('form-control');
+         for( let i = 0; i < inputEl.length; i++) {
+             console.log('input 확인')
+             console.log(inputEl.item(i).value);
+             // 입력값 확인
+             if (inputEl[i].value == '') {
+                 event.preventDefault();
+                 event.stopPropagation();
+                 return;
+             }
+
+             // disabled setting
+             if (inputEl[i].getAttribute('disabled')) {
+                 continue;
+             } else {
+                 inputEl[i].setAttribute('disabled', 'true');
+             }
+         }
+         console.log('수정값 전송 시작');
+         // submit (비동기)
+         let userId = document.getElementById('userId').value;
+         let userPwd = document.getElementById('userPwd').value;
+         let firstName = document.getElementById('firstName').value;
+         let lastName = document.getElementById('lastName').value;
+         let address = document.getElementById('address').value;
+         let phone = document.getElementById('phone').value;
+
+         fetch(`${root}/user/modify`,{
+             method:'post',
+             headers:{
+                 'Content-Type':'application/json',
+             },
+             body:JSON.stringify({
+                 userId,
+                 userPwd,
+                 firstName,
+                 lastName,
+                 address,
+                 phone,
+             }),
+         }).then( response => response.json() )
+             .then( data => {
+                 let msg = data.result == 'SUCCESS' ? "성공" : "실패";
+                 alert(`회원정보 수정 \${msg}`);
+         });
+     });
+
+     document.getElementById('deleteMember').addEventListener('click', event => {
+        let userId = document.getElementById('userId').value;
+        fetch(`${root}/user/\${userId}`,{
+            method: 'DELETE',
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then( response => response.json() )
+            .then( data => {
+                let msg = data.msg == 'SUCCESS' ? '성공' : '실패';
+                alert(`회원탈퇴 \${msg} 하였습니다.`);
+                if( data.msg == 'SUCCESS'  ) {
+                    location.href = `${root}/user/logout`;
+                }
+            })
+     });
  </script>
 </body>
 </html>

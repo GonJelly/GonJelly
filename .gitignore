@@ -11,5 +11,6 @@
 .idea/
 target/
 *.iml
+out/
 .classpath
 *.class
