@@ -10,3 +10,10 @@
 # 사용자정의 예외처리
 .idea/
 *.xml
+
+# vue 예외처리
+node_modules/
+
+# 개별 브렌치 예외처리
+ssafy/
+algo/:
