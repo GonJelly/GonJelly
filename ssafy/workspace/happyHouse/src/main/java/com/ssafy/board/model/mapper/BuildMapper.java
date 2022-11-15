@@ -16,5 +16,5 @@ public interface BuildMapper {
     // 아파트 상세조회하기
     BuildInfoDto dealDetail(String dealNo) throws SQLException;
     // 아파트 거래회수( 현재년도 기준 )
-    int dealCount(int year) throws SQLException;
+    int getTotalBuildDeal(Map<String,Object> param) throws SQLException;
 }

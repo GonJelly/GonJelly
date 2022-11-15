@@ -1,5 +1,7 @@
 package com.ssafy.board.controller;
 
+import com.ssafy.Util.PageNavigation;
+import com.ssafy.Util.SizeConstant;
 import com.ssafy.board.model.BuildInfoDto;
 import com.ssafy.board.model.service.BoardService;
 import com.ssafy.board.model.service.BuildService;
@@ -19,8 +21,6 @@ import java.util.*;
 @Controller
 @RequestMapping("/build")
 public class BuildingController {
-
-    private static final int LIMITEND = 6;
     private static final Logger logger = LoggerFactory.getLogger(BuildingController.class);
     @Autowired
     private BuildService buildService;
@@ -28,16 +28,18 @@ public class BuildingController {
     @GetMapping("/search")
     @ResponseBody
     public ResponseEntity<?> searchApt(@RequestParam(required = false) Map<String,Object> map) throws Exception {
-
-        int year = map.get("year") == null ? Year.now().getValue() : (int) map.get("year");
-        int count = buildService.dealCount(year);
-
-        map.put("year",Year.now().getValue());
-        map.put("start", (int) ( Math.random() * ( count < LIMITEND ? 0 : count ) ));
-
+        logger.debug("BuildingController searchApt map : {}",map);
+        // 아파트 조회
         List<BuildInfoDto> list = buildService.searchApt(map);
+        // 아파트 페이징
+        PageNavigation pageNav = buildService.makePageNavigation(map);
 
-        return new ResponseEntity<List<BuildInfoDto>>(list, HttpStatus.OK);
+        Map<String,Object> result = new HashMap<>();
+        result.put("buildList",list);
+        result.put("pageNav",pageNav);
+        result.put("params",map);
+
+        return new ResponseEntity<Map<String,Object>>(result, HttpStatus.OK);
     }
     @RequestMapping("/detail/{dealNo}")
     public String detail(@PathVariable String dealNo, Model model) throws Exception{

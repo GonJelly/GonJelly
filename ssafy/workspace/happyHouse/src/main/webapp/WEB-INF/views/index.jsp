@@ -74,7 +74,7 @@
                             </div>
                             <div class="row row-cols-4 justify-content-end py-md-1">
                                 <div class="col-md-4 col-sm-12">
-                                    <input type="button" class="btn btn-secondary" id="btn-search" value="검색하기" />
+                                    <input type="button" class="btn btn-secondary" id="searchAreaBtn" value="검색하기" />
                                 </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="BuildInfo">
-                <div class="col">
+                <%--<div class="col">
                     <div class="card shadow-sm">
                         <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                             <title>Placeholder</title>
@@ -123,136 +123,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
+                </div>--%>
+            </div>
+            <div class="row row-cols-1">
+                <div class="col-12" id="pageNav">
                 </div>
             </div>
         </div>
@@ -280,7 +154,8 @@
         // 시도 정보 받아오기
         sendRequest('sido','*00000000');
         // 아파트 조회
-        searchApt('all');
+        let params = {};
+        searchApt(params,1);
     }
 
     function sendRequest(selid, regcode) {
@@ -376,7 +251,7 @@
                                     <div class="card-text">
                                         <div class="row row-cols-2 justify-content-md-between">
                                             <div class="col-auto fs-5">\${apt.apartmentName}</div>
-                                            <div class="col-2 fw-5">\${apt.floor}층</div>
+                                            <div class="col-3 fw-5">\${apt.floor}층</div>
                                         </div>
                                         <div class="row row-cols-1 justify-content-md-end">
                                             <div class="col-auto fw-5">가격: \${apt.dealAmount} 만원</div>
@@ -434,10 +309,36 @@
     });
 
     document.querySelector('#searchAptBtn').addEventListener('click', function() {
-        let word = document.getElementById('aptName').value;
-        searchApt('apartName',word);
-    })
-    
+        let params = {};
+        params.word = document.getElementById('aptName').value;
+        params.key = 'apartName';
+        searchApt(params,1);
+    });
+
+    document.querySelector('#searchAreaBtn').addEventListener('click', function() {
+        let params = {};
+
+        let dongSel = document.getElementById('dong');
+        let dongCode = dongSel[dongSel.selectedIndex].value;
+
+        let yearSel = document.getElementById('year');
+        let year = yearSel[yearSel.selectedIndex].value;
+
+        let monthSel = document.getElementById('month');
+        let month = monthSel[monthSel.selectedIndex].value;
+
+        if ( dongCode == '' || dongCode == null || dongCode == undefined ) {
+            alert('선택하지 않은 목록이 있습니다.');
+            return;
+        }
+
+        params.regCode = dongCode;
+        params.year = year;
+        params.month = month;
+
+        searchApt(params,1);
+    });
+
     // 아파트 지역으로 검색하는 경우
     function searchOpenArea() {
         let main = document.querySelector('#searchArea');
@@ -466,12 +367,92 @@
         location.href = `${root}/build/detail/\${dealNo}`;
     }
 
-    function searchApt(key, word) {
-        let params = `key=\${key}&word=\${word == undefined ? '' : word}&pgno=1`;
+    function mvPage(obj, pgno) {
+        let parent = obj.parentNode;
+
+        let params = {};
+
+        params.key = parent.getAttribute('data-key');
+        params.word = parent.getAttribute('data-word');
+        params.regCode = parent.getAttribute('data-regCode');
+        params.year = parent.getAttribute('data-year');
+        params.month = parent.getAttribute('data-month');
+
+        console.log(params);
+        searchApt(params,pgno);
+    }
+
+    function searchApt(data, pgno) {
+        console.log(typeof data);
+        if( data.key == undefined || data.key == null ) {
+            data.key = '';
+        }
+
+        if( data.word == undefined || data.word == null ) {
+            data.word = '';
+        }
+
+        if(data.regCode == undefined || data.regCode == null ) {
+            data.regCode = '';
+        }
+
+        if ( data.year == undefined || data.year == null ) {
+            data.year = '';
+        }
+
+        if ( data.month == undefined || data.month == null ) {
+            data.month = '';
+        }
+
+        if( pgno === undefined || pgno == null ) {
+            pgno = 1;
+        }
+
+        let params = `key=\${data.key}&word=\${data.word}&pgno=\${pgno}&regCode=\${data.regCode}&year=\${data.year}&month=\${data.month}`;
         let url = `${root}/build/search`;
         fetch(`\${url}?\${params}`)
             .then( response => response.json() )
-            .then( data => makeAptCard(data) );
+            .then( data => {
+                console.log(data);
+                makeAptCard(data.buildList);
+                makePageNav(data.pageNav, data.params);
+            } );
+    }
+
+    function makePageNav(data, params) {
+        let navigation = document.getElementById('pageNav');
+
+        let beforePage = data.startRange ? 1 : data.startPage;
+        let afterPage = data.endRange ? data.endPage : data.endPage + 1;
+
+        let nav = `<ul class="pagination  justify-content-center">
+                        <li class="page-item" data-key='\${params.key}' data-word='\${params.word}' data-regCode='\${params.regCode}' data-year='\${params.year}' data-month='\${params.month}' >
+                            <a href="#" class="page-link" onclick="mvPage(this,1)">최신</a>
+                        </li>
+                        <li class="page-item" data-key='\${params.key}' data-word='\${params.word}' data-regCode='\${params.regCode}' data-year='\${params.year}' data-month='\${params.month}'>
+                            <a href="#" class="page-link" onclick="mvPage(this,'\${beforePage}')">이전</a>
+                        </li>`;
+        for( let i = data.startPage; i <= data.endPage; i++) {
+            if( data.currentPage == i ) {
+                nav += `<li class="page-item active" data-key='\${params.key}' data-word='\${params.word}' data-regCode='\${params.regCode}' data-year='\${params.year}' data-month='\${params.month}'>
+                            <a href="#" class="page-link" onclick="mvPage(this,'\${i}')">\${i}</a>
+                        </li>`;
+            } else {
+                nav += `<li class="page-item" data-key='\${params.key}' data-word='\${params.word}' data-regCode='\${params.regCode}' data-year='\${params.year}' data-month='\${params.month}'>
+                            <a href="#" class="page-link" onclick="mvPage(this,'\${i}')">\${i}</a>
+                        </li>`;
+            }
+        }
+        nav += `<li class="page-item" data-key='\${params.key}' data-word='\${params.word}' data-regCode='\${params.regCode}' data-year='\${params.year}' data-month='\${params.month}'>
+                    <a href="#" class="page-link" onclick="mvPage(this,'\${afterPage}')">다음</a>
+                </li>
+                <li class="page-item" data-key='\${params.key}' data-word='\${params.word}' data-regCode='\${params.regCode}' data-year='\${params.year}' data-month='\${params.month}'>
+                    <a href="#" class="page-link" onclick="mvPage(this,'\${data.totalPageCount}')">마지막</a>
+                </li>
+            </ul>`;
+
+
+        navigation.innerHTML = nav;
     }
 </script>
 </body>

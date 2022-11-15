@@ -32,6 +32,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class ApartDateCrawling {
 
@@ -58,51 +60,84 @@ public class ApartDateCrawling {
             	// 해에 따라서 분기
                 if( current_year != year ) {
                 	// 같은 해가 아니라면 12월 전부 데이터 가져오기
-                    for( int m = 1; m <= 12; m++) {
+                    for( int m = 12; m >= 1; m--) {
                         String month = m < 10 ? "0" + m : String.valueOf(m);
                         for( String LAWD_CD : gugunList) {
-                        	String path = FILEPATH + File.separator + LAWD_CD + File.separator + year + month;
-                        	if( !Files.isDirectory(Paths.get(path))) {
-                        		Files.createDirectories(Paths.get(path));
-                        		System.out.println("create new directroy");
-                        	}
-                        	String fileName = LAWD_CD + "_" + year + month + "_" + PAGENO + ".xml";
-                        	file = new File( path + File.separator + fileName);
-                        	// 존재한다면 다음 저장하지 않음
-                        	if( file.exists() ) continue;
-                        	
-                        	DEAL_YMD = (year) + month;
-//                        	System.out.println(LAWD_CD + "::" + DEAL_YMD);
-                        	Document document = getApartInfo(DEAL_YMD,LAWD_CD);
-//                        	System.out.println(document);
-                        	
-                        	saveFile(document,file);
-//                        	System.out.println("save OK");
+                            // 초기페이지 설정
+                            int pgno = Integer.parseInt(PAGENO);
+
+                            String path = FILEPATH + File.separator + LAWD_CD + File.separator + year + month;
+                            if (!Files.isDirectory(Paths.get(path))) {
+                                Files.createDirectories(Paths.get(path));
+                                System.out.println("create new directroy");
+                            }
+
+                            while( true ) {
+                                String fileName = LAWD_CD + "_" + year + month + "_" + pgno + ".xml";
+                                file = new File(path + File.separator + fileName);
+                                // 존재한다면 다음 저장하지 않음
+                                if (file.exists()) {
+                                    pgno++;
+                                    continue;
+                                }
+
+                                DEAL_YMD = (year) + month;
+                                // xml문서 가져오기
+                                Document document = getApartInfo(DEAL_YMD, LAWD_CD, pgno);
+                                // 파일 저장
+                                saveFile(document, file);
+//                        	    System.out.println("save OK");
+                                // 최종 거래 건수 조회
+                                Element element = document.getDocumentElement();
+                                NodeList nodeList = element.getElementsByTagName("totalCount");
+                                String totalCount = nodeList.item(0).getTextContent();
+
+                                // 종료
+                                if( !totalCount.equals(NUMBEROFRAW) ) break;
+                                // 다음 페이지 검사
+                                pgno++;
+                            }
                         }
                     }
                 } else {
                 	// 같은 해라면 현재월까지 데이터 가져오기
-                    for( int m = 1; m <= current_month; m++) {
+                    for( int m = current_month; m >= 1; m--) {
                         String month = m < 10 ? "0" + m : String.valueOf(m);
 	                    for( String LAWD_CD : gugunList) {
+                            int pgno = Integer.parseInt(PAGENO);
 	                    	String path = FILEPATH + File.separator + LAWD_CD + File.separator + year + month;
                         	if( !Files.isDirectory(Paths.get(path))) {
                         		Files.createDirectories(Paths.get(path));
                         		System.out.println("create new directroy");
                         	}
-                        	String fileName = LAWD_CD + "_" + year + month + "_" + PAGENO + ".xml"; 
-                        	file = new File( path + File.separator + fileName);
-	                    	
-                        	// 존재한다면 다음 저장하지 않음
-	                    	if( file.exists() ) continue;
-	                    	
-	                    	DEAL_YMD = (year) + month;
-//	                    	System.out.println(LAWD_CD + "::" + DEAL_YMD);
-	                    	Document document = getApartInfo(DEAL_YMD,LAWD_CD);
-//	                    	System.out.println(document);
-	                    	
-	                    	saveFile(document,file);
-//	                    	System.out.println("save OK");
+
+                            while ( true ) {
+                                String fileName = LAWD_CD + "_" + year + month + "_" + pgno + ".xml";
+                                file = new File(path + File.separator + fileName);
+
+                                // 존재한다면 다음 저장하지 않음
+                                if (file.exists()) {
+                                    pgno++;
+                                    continue;
+                                }
+
+                                DEAL_YMD = (year) + month;
+                                // xml문서 가져오기
+                                Document document = getApartInfo(DEAL_YMD, LAWD_CD, pgno);
+                                // 파일 저장
+                                saveFile(document, file);
+    //	                    	System.out.println("save OK");
+
+                                // 최종 거래 건수 조회
+                                Element element = document.getDocumentElement();
+                                NodeList nodeList = element.getElementsByTagName("totalCount");
+                                String totalCount = nodeList.item(0).getTextContent();
+
+                                // 종료
+                                if( !totalCount.equals(NUMBEROFRAW) ) break;
+                                // 다음 페이지 검사
+                                pgno++;
+                            }
 	                    }
                     }
                 }
@@ -116,7 +151,7 @@ public class ApartDateCrawling {
     		e.printStackTrace();
     	}
     }
-    
+
     private List<String> getRegcodes() {
 		Set<String> gugunCode = new HashSet<String>();
 		List<String> gugunList = new ArrayList<String>();
@@ -180,11 +215,11 @@ public class ApartDateCrawling {
         return sb.toString();
     }
     
-    private static Document getApartInfo(String _DEAL_YMD, String LAWD_CD) throws Exception {
+    private static Document getApartInfo(String _DEAL_YMD, String LAWD_CD, int pgno) throws Exception {
         StringBuilder url = new StringBuilder();
         url.append("http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
         url.append("?serviceKey=").append(ServiceKey);
-        url.append("&pageNo=").append(PAGENO);
+        url.append("&pageNo=").append(pgno);
         url.append("&numOfRows=").append(NUMBEROFRAW);
         url.append("&LAWD_CD=").append(LAWD_CD);
         url.append("&DEAL_YMD=").append(_DEAL_YMD);
