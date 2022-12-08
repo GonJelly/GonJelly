@@ -1,7 +1,5 @@
 package baekjoon.label2000;
 
-import com.sun.org.apache.bcel.internal.generic.ARETURN;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

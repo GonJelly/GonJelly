@@ -1,7 +1,5 @@
 package swea;
 
-import com.sun.org.apache.xml.internal.utils.StringToStringTable;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
