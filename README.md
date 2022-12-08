@@ -64,7 +64,7 @@
     3. 재귀를 실행을 결정하는 요인(값)은 매개변수로 설정해준다.!!
     ```
     ### 시간적으로 보는 재귀 함수!!
-    ![recursive_function.png](..%2FUsers%2Fqlwms%2FDownloads%2Frecursive_function.png)
+    ![recursive_function](https://user-images.githubusercontent.com/87114676/206410106-e73c7073-a048-4e52-87e7-c2e791c797dc.png)
      ----
 
     ```
@@ -110,7 +110,7 @@
 
 - $F(n) = F(n-1) + F(n-2)$ 관계가 성립하는 수
 
-![Fibonaci.drawio.png](..%2FUsers%2Fqlwms%2FDownloads%2FFibonaci.drawio.png)
+![Fibonaci drawio](https://user-images.githubusercontent.com/87114676/206477250-041ce0b9-fb02-47ee-be9b-d15a9a4be597.png)
 
 위와 같이 피보나치 수를 구하는 함수를 재귀를 돌리게 되면 `중복 호출` 이 발생하는 문제가 생긴다.
 그렇게되면 `메모리` 와 `속도` 측면에서 기하급수적으로 커져서 문제를 해결할 수 없다.
