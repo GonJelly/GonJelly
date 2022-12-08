@@ -14,11 +14,13 @@ function makePinPoint(data) {
     setMarkers(null);
 
     if( data.length == 0 ) { return; }
+
     // 아파트정보가 1개면 지도 움직이지 못하도록 고정
     if( data.length == 1) {
         map.setDraggable(false);
         map.setZoomable(false);
     }
+
     else {
         map.setDraggable(true);
         map.setZoomable(true);
