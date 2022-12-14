@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"javax.servlet"},{"l":"javax.servlet.annotation"},{"l":"javax.servlet.descriptor"},{"l":"javax.servlet.http"}]
