@@ -207,7 +207,7 @@
     - $nCr$로 표현한다.
 - $nCr = n-1Cr-1 + n-1Cr$
 
-  [https://viewer.diagrams.net/?border=0&tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&open=G1zCbEDYPHbvFpKMBae7U-FitFJ7rWGtbS](https://viewer.diagrams.net/?border=0&tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&open=G1zCbEDYPHbvFpKMBae7U-FitFJ7rWGtbS)
+![bfs_image](https://user-images.githubusercontent.com/87114676/207532799-1d73ce32-7294-4dcf-ae55-002316c63978.png)
 
 - 수학적 공식
 
@@ -290,7 +290,8 @@
     - 방문했던 자식 노드을 다시 너비우선탐색을 진행하기 위해서 방문한 자식들을 저장하여 사용하기 위해서
       선입선출 방식의 자료구조 `큐` 를 활용함!!
 
-      [https://viewer.diagrams.net/?border=0&tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&open=G1Mr2xHvviHrfavx313FNZ7HvOQuLSSFvp](https://viewer.diagrams.net/?border=0&tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&open=G1Mr2xHvviHrfavx313FNZ7HvOQuLSSFvp)
+
+        ![BFS_img drawio](https://user-images.githubusercontent.com/87114676/207532862-b28d3bb0-2485-4962-9fe0-7c290d1db0fa.png)
 
       > 의사코드
       >
@@ -322,10 +323,10 @@
     - 함수(function)을 호출하게 되면 메모리에 `스택` 형태로 저장되게 된다.!!!
       그렇기에 재귀적으로 구현을 하여도 DFS가 가능한 것이다.
 
-      [https://viewer.diagrams.net/?border=0&tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=DFS.drawio&open=RzVhbb9sgFP41lrqHRjb4%2Bmjnskpb1UmV2u1pIjZ2rBKTYrIk%2B%2FWDgBM7tpdMS5rkIh1%2FwOHwfXDAGHA4X39maDF7pAkmBjCTtQFHBgCWDYAhf2ayUYjnaiBjeaIr7YHn%2FDfWoKnRZZ7gslGRU0p4vmiCMS0KHPMGhhijq2a1lJJmrwuU4RbwHCPSRl%2FzhM8U6gNvjz%2FgPJtVPVtuoErmqKqsR1LOUEJXNQiODThklHJlzddDTCR5FS%2Bq3aSndBcYwwU%2FpcGXzUPo4afyMTDBkMc%2BeudP947y8guRpR6wDpZvKgYYXRYJlk4sA0arWc7x8wLFsnQlNBfYjM%2BJLtbuMON43RuntRu9mDaYzjFnG1FFN%2FB1THrC2Lbmb7WnH1aczmrUQ0%2BDSEue7VzvWRGGJuYfSLKOkyTEXUgz3pBcsMXgcaqmitev0x2A4rdsy%2FbTkgs3WOOlWhSWI%2Bw0J2RICWXbbmHqyK%2FEacFruPrItpzRN1wrcbef8yhlVYxrqRyrLZXldEgFLiYVaEmVLouY57SwbkWzBGE%2FjTu1iX08TS%2BjjXeqNheTBvZKczPLKXGwn9hd0vhgCi%2B1bFzv2tLYvdLAW5EGW0Icr0uawPUgupQ08NrSuL3S2LciTZqmIO5MaIk7dZ1LbTbBtaWxTjgXHKG%2FUmy%2BzuTxeTBFZR4PqPD4UxxBCV2KMURJzvBWcekClxJilCON3Fuucx6GIQgGgd8kGdoDAFs8Aw8MbL9jX3fcQXW%2BPz%2Fd7b19NHm%2Be%2FlkAJdIUqZMWBnfktGHlAtUNBRy35fyAK7WyX2plAolbwyrdrpCzZNMOjWfYjTKrarwYowjQxxiI18aATQCMV5T2pFphIE0wqEsvc0gQ0va46EReoZvSSMCRrCtFroy8muGnYrMAsw78X%2BRkQUjGZmMW9hjI9gafiRxNZiDESojFJnTfBX%2Fv8ycDxjLB3Yl18lr52h73%2FXM43tHM90XVO4VESJ5JtMSwem%2Bh%2F9LS%2F5B4vfBwGmnfq8j9VvAuVQyah%2BZzkmmkHMyMUfm6GC31SSfgVUbHj%2BEdr66XWw3PeEqAhdJKO905BmHoFLslU0Sm4zjdc6%2F1%2Bwf0h44%2Bmm0rhWNNvpBdYmT1qXQAa8iLLpkMT46RdoCHCG4whgmYov%2F1Yyji3Xdwzeaiwj3qybo0bdyoeLXrerXRoeOQM%2BLZOWII5Zh3nK0nQS7YXfNC%2FG4v%2F1S1fd3iHD8Bw%3D%3D](https://viewer.diagrams.net/?border=0&tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=DFS.drawio&open=RzVhbb9sgFP41lrqHRjb4%2Bmjnskpb1UmV2u1pIjZ2rBKTYrIk%2B%2FWDgBM7tpdMS5rkIh1%2FwOHwfXDAGHA4X39maDF7pAkmBjCTtQFHBgCWDYAhf2ayUYjnaiBjeaIr7YHn%2FDfWoKnRZZ7gslGRU0p4vmiCMS0KHPMGhhijq2a1lJJmrwuU4RbwHCPSRl%2FzhM8U6gNvjz%2FgPJtVPVtuoErmqKqsR1LOUEJXNQiODThklHJlzddDTCR5FS%2Bq3aSndBcYwwU%2FpcGXzUPo4afyMTDBkMc%2BeudP947y8guRpR6wDpZvKgYYXRYJlk4sA0arWc7x8wLFsnQlNBfYjM%2BJLtbuMON43RuntRu9mDaYzjFnG1FFN%2FB1THrC2Lbmb7WnH1aczmrUQ0%2BDSEue7VzvWRGGJuYfSLKOkyTEXUgz3pBcsMXgcaqmitev0x2A4rdsy%2FbTkgs3WOOlWhSWI%2Bw0J2RICWXbbmHqyK%2FEacFruPrItpzRN1wrcbef8yhlVYxrqRyrLZXldEgFLiYVaEmVLouY57SwbkWzBGE%2FjTu1iX08TS%2BjjXeqNheTBvZKczPLKXGwn9hd0vhgCi%2B1bFzv2tLYvdLAW5EGW0Icr0uawPUgupQ08NrSuL3S2LciTZqmIO5MaIk7dZ1LbTbBtaWxTjgXHKG%2FUmy%2BzuTxeTBFZR4PqPD4UxxBCV2KMURJzvBWcekClxJilCON3Fuucx6GIQgGgd8kGdoDAFs8Aw8MbL9jX3fcQXW%2BPz%2Fd7b19NHm%2Be%2FlkAJdIUqZMWBnfktGHlAtUNBRy35fyAK7WyX2plAolbwyrdrpCzZNMOjWfYjTKrarwYowjQxxiI18aATQCMV5T2pFphIE0wqEsvc0gQ0va46EReoZvSSMCRrCtFroy8muGnYrMAsw78X%2BRkQUjGZmMW9hjI9gafiRxNZiDESojFJnTfBX%2Fv8ycDxjLB3Yl18lr52h73%2FXM43tHM90XVO4VESJ5JtMSwem%2Bh%2F9LS%2F5B4vfBwGmnfq8j9VvAuVQyah%2BZzkmmkHMyMUfm6GC31SSfgVUbHj%2BEdr66XWw3PeEqAhdJKO905BmHoFLslU0Sm4zjdc6%2F1%2Bwf0h44%2Bmm0rhWNNvpBdYmT1qXQAa8iLLpkMT46RdoCHCG4whgmYov%2F1Yyji3Xdwzeaiwj3qybo0bdyoeLXrerXRoeOQM%2BLZOWII5Zh3nK0nQS7YXfNC%2FG4v%2F1S1fd3iHD8Bw%3D%3D)
+      ![DFS drawio](https://user-images.githubusercontent.com/87114676/207532871-09abccbf-fc3c-4785-9b53-75ee153bc8be.png)
 
       위 그림에 있는 의사코드를 좀 더 시각적으로 나타내면 아래와 같이 DFS가 동작한다.!!
 
-      [https://viewer.diagrams.net/?border=0&tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&open=G1IOSbQNR2UwIpLLCPtW1HD0mDxY9LCB2L](https://viewer.diagrams.net/?border=0&tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&open=G1IOSbQNR2UwIpLLCPtW1HD0mDxY9LCB2L)
+      ![DFS_tree drawio](https://user-images.githubusercontent.com/87114676/207532891-8265757f-aa3c-436b-8c0d-be9baf978c91.png)
 
       모든 노드를 방문해서 로직을 처리할 때까지 완전탐색 하는 것이다.
