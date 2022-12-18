@@ -1,0 +1,30 @@
+function makeList(users) {
+        let tbody = ``;
+        users.forEach(function (user) {
+          tbody += `
+						<tr id="view_${user.userId}" class="view text-center" data-id="${user.userId}">
+							<td>${user.userId}</td>
+							<td>${user.userPwd}</td>
+							<td>${user.userName}</td>
+							<td>${user.emailId}@${user.emailDomain}</td>
+							<td>${user.joinDate}</td>
+							<td>
+								<button type="button" class="modifyViewBtn btn btn-outline-primary btn-sm">수정</button>
+								<button type="button" class="deleteBtn btn btn-outline-danger btn-sm">삭제</button>
+							</td>
+						</tr>
+						<tr id="mview_${user.userId}" data-id="${user.userId}" style="display: none;" class="text-center">
+							<td>${user.userId}</td>
+							<td><input type="text" name="userpwd" id="userpwd${user.userId}" value="${user.userPwd}"></td>
+							<td>${user.userName}</td>
+							<td><input type="text" name="email" id="email${user.userId}" value="${user.emailId}@${user.emailDomain}"></td>
+							<td>${user.joinDate}</td>
+							<td>
+								<button type="button" class="modifyBtn btn btn-primary btn-sm">수정</button>
+								<button type="button" class="cancelBtn btn btn-danger btn-sm">취소</button>
+							</td>
+						</tr>
+					`;
+        });
+        document.querySelector("#userlist").innerHTML = tbody;
+      }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ssafy.board.model.mapper.BuildMapper">
+
+	<resultMap id="deal" type="buildDeal">
+		<result column="no" property="dealNo"></result>
+		<result column="dealAmount" property="dealAmount"></result>
+		<result column="dealYear" property="dealYear"></result>
+		<result column="dealMonth" property="dealMonth"></result>
+		<result column="dealDay" property="dealDay"></result>
+		<result column="area" property="area"></result>
+		<result column="floor" property="floor"></result>
+		<result column="cancelDealType" property="cancelDealType"></result>
+	</resultMap>
+
+	<resultMap id="building" type="buildInfoDto" extends="deal">
+		<result column="aptCode" property="aptCode"></result>
+		<result column="buildYear" property="buildYear"></result>
+		<result column="roadName" property="roadName"></result>
+		<result column="roadNameBonbun" property="roadNameBonbun"></result>
+		<result column="roadNameBubun" property="roadNameBubun"></result>
+		<result column="roadNameSeq" property="roadNameSeq"></result>
+		<result column="roadNameBasementCode" property="roadNameBasementCode"></result>
+		<result column="roadNameCode" property="roadNameCode"></result>
+		<result column="dong" property="dong"></result>
+		<result column="bonbun" property="bonbun"></result>
+		<result column="bubun" property="bubun"></result>
+		<result column="sigunguCode" property="sigunguCode"></result>
+		<result column="eubmyundongCode" property="eubmyundongCode"></result>
+		<result column="dongCode" property="dongCode"></result>
+		<result column="landCode" property="landCode"></result>
+		<result column="apartmentName" property="apartmentName"></result>
+		<result column="jibun" property="jibun"></result>
+		<result column="lng" property="lng"></result>
+		<result column="lat" property="lat"></result>
+		<result column="address" property="address"></result>
+	</resultMap>
+
+	<sql id="keyword">
+		<if test="word != '' and word != null">
+			<if test="key == 'h.apartmentName'" >
+				and ${key} Like CONCAT('%',#{word},'%')
+			</if>
+		</if>
+		<if test="regCode != '' and regCode != null">
+			and h.dongCode = #{regCode}
+		</if>
+		<if test="year != '' and year != null">
+			and d.dealYear = #{year}
+		</if>
+		<if test="month != '' and month != null">
+			and d.dealmonth = #{month}
+		</if>
+	</sql>
+
+	<select id="searchApt" parameterType="map" resultMap="building">
+		select d.no, h.apartmentName, d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.floor
+		from housedeal d left outer join houseinfo h on d.aptCode = h.aptCode
+		<where>
+			<include refid="keyword"></include>
+		</where>
+		order by d.dealYear DESC , d.dealMonth DESC, d.dealDay DESC
+		limit #{start}, #{limitSize}
+	</select>
+
+	<select id="getTotalBuildDeal" parameterType="map" resultType="int">
+		select COUNT(d.no)
+		from housedeal d left outer join houseinfo h on d.aptCode = h.aptCode
+		<where>
+			<include refid="keyword"></include>
+		</where>
+	</select>
+
+	<select id="dealDetail" parameterType="string" resultMap="building">
+		select h.apartmentName, h.buildYear, CONCAT(c.sidoName,' ',c.gugunName,' ',c.dongName,' ',h.jibun) as address, h.dong, h.jibun, d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.floor
+		from (housedeal d inner join houseinfo h on d.aptCode = h.aptCode) inner join dongCode c on c.dongCode = h.dongCode
+		where d.no = #{dealNo}
+	</select>
+
+</mapper>
