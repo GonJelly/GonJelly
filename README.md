@@ -15,7 +15,7 @@ Here are some ideas to get you started:
 
 ![header](https://capsule-render.vercel.app/api?type=slice&color=auto&height=300&section=header&text=Junyoung%20Park&fontSize=90)
 
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Gonjelly)](https://github.com/anuraghazra/github-readme-stats)
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Gonjelly&show_icons=true&theme=tokyonight)](https://github.com/anuraghazra/github-readme-stats)
 
 [![Solved.ac 프로필](http://mazassumnida.wtf/api/v2/generate_badge?boj=qlwms221)](https://solved.ac/qlwms221)
 
