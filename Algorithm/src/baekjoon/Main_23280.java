@@ -5,7 +5,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
-
+/** 못 풀었음
+ * */
 public class Main_23280 {
 
 	static int N, a, b, result;
