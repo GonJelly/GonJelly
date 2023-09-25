@@ -3,7 +3,7 @@ package baekjoon;
 import java.util.*;
 import java.io.*;
 
-public class Main_16234  {
+public class Main_16234_temp  {
 
 	private static int N, L, R;
 	private static int[][] map, direction = {
@@ -29,42 +29,30 @@ public class Main_16234  {
 			}
 		}
 
-		int cnt = 0;
-
-		while(true) {
-			List<List<int[]>> list = new ArrayList<>();
+		int next;
+		int day = 0;
+		do {
+			visit = new boolean[N][N];
+			next = 0;
 			// N x N의 크기의 땅을 탐색해서 연합을 조사한다.
 			for (int x = 0; x < N; x++) {
 				for (int y = 0; y < N; y++) {
 					// 방문하지 않았던 나라여야 한다.
 					if (!visit[x][y]) {
 						// 해당 좌표에서 넓비 우선 탐색으로 연합을 조사
-						List<int[]> temp = bfs(x, y);
-						if( temp.size() > 1 ) {
-							list.add(temp);
-						}
+						next += bfs(x, y);
 					}
 				}
 			}
-			System.out.println(list.size());
-			if( list.size() != 0 ) {
-				for(List<int[]> t : list) {
-					int sum = 0;
-					for(int[] pos : t)
-						sum += map[pos[0]][pos[1]];
-					int avg = sum / t.size();
-					t.stream().forEach(pos -> {
-						map[pos[0]][pos[1]] = avg;
-					});
-				}
+			if(next > 0) {
+				day++;
 			}
-			if( list.size() == 0 ) break;
-			else cnt++;
-		}
-		System.out.println("인구 이동 일수 : " + cnt);
+		} while(next > 0);
+		System.out.println(day);
+
 	}
 
-	private static List<int[]> bfs(int x, int y) {
+	private static int bfs(int x, int y) {
 
 		// 연합들의 좌표를 저장할 리스트
 		List<int[]> list = new ArrayList<>();
@@ -96,21 +84,19 @@ public class Main_16234  {
 				}
 			}
 		}
-
-		return list;
 		// System.out.println("연합을 형성한 나라의 갯수 : " + list.size());
 		// 연합의 인구 이동 시작
-		// int sum = 0;
-		// for(int[] pos : list) {
-		// 	sum += map[pos[0]][pos[1]];
-		// }
-		// int avg = sum / list.size();
-		// // 연합의 인구 이동 시작s
-		// list.stream().forEach(pos -> {
-		// 	map[pos[0]][pos[1]] = avg;
-		// });
-		//
-		// return us;
+		int sum = 0;
+		for(int[] pos : list) {
+			sum += map[pos[0]][pos[1]];
+		}
+		int avg = sum / list.size();
+		// 연합의 인구 이동 시작
+		list.stream().forEach(pos -> {
+			map[pos[0]][pos[1]] = avg;
+		});
+
+		return us;
 
 	}
 
@@ -127,7 +113,4 @@ public class Main_16234  {
 		}
 		return false;
 	}
-
-
-
 }
